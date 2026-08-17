@@ -152,7 +152,6 @@ public class DeptController extends BaseController<DeptService, DeptResp, DeptDe
   - 存储配置：管理文件存储配置，支持本地存储、兼容 S3 协议对象存储
 - 在线用户：管理当前登录用户，可一键踢除下线
 - 日志管理：管理系统登录日志、操作日志，支持查看日志详情，包含请求头、响应头等报文信息
-- 任务日志：管理定时任务执行日志，包含停止、重试指定批次等功能
 - 代码生成：提供根据数据库表自动生成相应的前后端 CRUD 代码的功能，支持同步最新表结构及代码生成预览
 
 ## 系统截图
@@ -289,7 +288,6 @@ continew-admin-ui
 │  │  ├─ open            # 能力开放
 
 │  │  ├─ schedule        # 任务调度
-│  │  │ └─ log             # 任务日志
 │  │  └─ system          # 系统管理
 │  │    ├─ config          # 系统配置
 │  │    ├─ dept            # 部门管理
