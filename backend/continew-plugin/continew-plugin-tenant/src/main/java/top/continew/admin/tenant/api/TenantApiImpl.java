@@ -16,7 +16,6 @@
 
 package top.continew.admin.tenant.api;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import top.continew.admin.common.api.tenant.TenantApi;
 import top.continew.admin.tenant.constant.TenantCacheConstants;
@@ -32,10 +31,13 @@ import top.continew.starter.extension.crud.model.entity.BaseIdDO;
  * @since 2025/7/23 21:13
  */
 @Service
-@RequiredArgsConstructor
 public class TenantApiImpl implements TenantApi {
 
     private final TenantMapper baseMapper;
+
+    public TenantApiImpl(TenantMapper baseMapper) {
+        this.baseMapper = baseMapper;
+    }
 
     @Override
     public void bindAdminUser(Long tenantId, Long userId) {

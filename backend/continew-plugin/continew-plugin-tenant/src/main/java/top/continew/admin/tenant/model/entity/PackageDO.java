@@ -63,4 +63,44 @@ public class PackageDO extends BaseDO {
      * 状态
      */
     private DisEnableStatusEnum status;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
+    }
+
+    public Boolean getMenuCheckStrictly() {
+        return menuCheckStrictly;
+    }
+
+    public void setMenuCheckStrictly(Boolean menuCheckStrictly) {
+        this.menuCheckStrictly = menuCheckStrictly;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public DisEnableStatusEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(DisEnableStatusEnum status) {
+        this.status = status;
+    }
 }

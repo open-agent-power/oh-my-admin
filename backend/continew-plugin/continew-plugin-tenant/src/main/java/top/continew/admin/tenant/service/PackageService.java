@@ -16,12 +16,7 @@
 
 package top.continew.admin.tenant.service;
 
-import top.continew.admin.common.base.service.BaseService;
 import top.continew.admin.tenant.model.entity.PackageDO;
-import top.continew.admin.tenant.model.query.PackageQuery;
-import top.continew.admin.tenant.model.req.PackageReq;
-import top.continew.admin.tenant.model.resp.PackageDetailResp;
-import top.continew.admin.tenant.model.resp.PackageResp;
 import top.continew.starter.data.service.IService;
 
 /**
@@ -30,7 +25,7 @@ import top.continew.starter.data.service.IService;
  * @author 小熊
  * @since 2024/11/26 11:25
  */
-public interface PackageService extends BaseService<PackageResp, PackageDetailResp, PackageQuery, PackageReq>, IService<PackageDO> {
+public interface PackageService extends IService<PackageDO> {
 
     /**
      * 检查套餐状态

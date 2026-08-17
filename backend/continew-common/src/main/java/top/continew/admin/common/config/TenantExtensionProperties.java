@@ -49,6 +49,30 @@ public class TenantExtensionProperties {
      */
     private List<Long> ignoreMenus;
 
+    public String getTenantCodeHeader() {
+        return tenantCodeHeader;
+    }
+
+    public void setTenantCodeHeader(String tenantCodeHeader) {
+        this.tenantCodeHeader = tenantCodeHeader;
+    }
+
+    public Long getDefaultTenantId() {
+        return defaultTenantId;
+    }
+
+    public void setDefaultTenantId(Long defaultTenantId) {
+        this.defaultTenantId = defaultTenantId;
+    }
+
+    public List<Long> getIgnoreMenus() {
+        return ignoreMenus;
+    }
+
+    public void setIgnoreMenus(List<Long> ignoreMenus) {
+        this.ignoreMenus = ignoreMenus;
+    }
+
     /**
      * 是否为默认租户
      *

@@ -18,7 +18,6 @@ package top.continew.admin.tenant.config;
 
 import cn.hutool.core.util.StrUtil;
 import jakarta.servlet.http.HttpServletRequest;
-import lombok.RequiredArgsConstructor;
 import top.continew.admin.common.config.TenantExtensionProperties;
 import top.continew.admin.tenant.service.TenantService;
 import top.continew.starter.core.util.ServletUtils;
@@ -33,11 +32,15 @@ import top.continew.starter.extension.tenant.context.TenantContext;
  * @author Charles7c
  * @since 2024/12/12 15:35
  */
-@RequiredArgsConstructor
 public class DefaultTenantProvider implements TenantProvider {
 
     private final TenantExtensionProperties tenantExtensionProperties;
     private final TenantService tenantService;
+
+    public DefaultTenantProvider(TenantExtensionProperties tenantExtensionProperties, TenantService tenantService) {
+        this.tenantExtensionProperties = tenantExtensionProperties;
+        this.tenantService = tenantService;
+    }
 
     @Override
     public TenantContext getByTenantId(String tenantIdAsString, boolean verify) {

@@ -16,7 +16,6 @@
 
 package top.continew.admin.tenant.api;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import top.continew.admin.common.api.tenant.PackageMenuApi;
 import top.continew.admin.tenant.service.PackageMenuService;
@@ -30,10 +29,13 @@ import java.util.List;
  * @since 2025/7/23 21:13
  */
 @Service
-@RequiredArgsConstructor
 public class PackageMenuApiImpl implements PackageMenuApi {
 
     private final PackageMenuService baseService;
+
+    public PackageMenuApiImpl(PackageMenuService baseService) {
+        this.baseService = baseService;
+    }
 
     @Override
     public List<Long> listMenuIdsByPackageId(Long packageId) {

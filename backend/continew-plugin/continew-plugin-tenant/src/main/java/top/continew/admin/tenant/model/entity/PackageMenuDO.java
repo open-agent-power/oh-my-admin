@@ -47,6 +47,22 @@ public class PackageMenuDO implements Serializable {
      */
     private Long menuId;
 
+    public Long getPackageId() {
+        return packageId;
+    }
+
+    public void setPackageId(Long packageId) {
+        this.packageId = packageId;
+    }
+
+    public Long getMenuId() {
+        return menuId;
+    }
+
+    public void setMenuId(Long menuId) {
+        this.menuId = menuId;
+    }
+
     public PackageMenuDO(Long packageId, Long menuId) {
         this.packageId = packageId;
         this.menuId = menuId;
