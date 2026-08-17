@@ -318,56 +318,6 @@ CREATE TABLE IF NOT EXISTS `sys_file` (
     INDEX `idx_deleted`(`deleted`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='文件表';
 
-CREATE TABLE IF NOT EXISTS `sys_client` (
-    `id`                   bigint(20)  AUTO_INCREMENT              COMMENT 'ID',
-    `client_id`            varchar(50) NOT NULL                    COMMENT '客户端ID',
-    `client_type`          varchar(50) NOT NULL                    COMMENT '客户端类型',
-    `auth_type`            json        NOT NULL                    COMMENT '认证类型',
-    `active_timeout`       bigint(20)  NOT NULL DEFAULT -1         COMMENT 'Token最低活跃频率（单位：秒，-1：不限制，永不冻结）',
-    `timeout`              bigint(20)  NOT NULL DEFAULT 2592000    COMMENT 'Token有效期（单位：秒，-1：永不过期）',
-    `is_concurrent`        bit(1)      NOT NULL DEFAULT b'1'       COMMENT '是否允许同一账号多地同时登录（true：允许；false：新登录挤掉旧登录）',
-    `replaced_range`       varchar(20) DEFAULT NULL                COMMENT '顶人下线的范围（CURR_DEVICE_TYPE：当前客户端类型；ALL_DEVICE_TYPE：所有客户端类型）',
-    `max_login_count`      int         NOT NULL DEFAULT -1         COMMENT '同一账号最大登录数量（-1：不限制，只有在 isConcurrent=true，isShare=false 时才有效）',
-    `overflow_logout_mode` varchar(20) DEFAULT NULL                COMMENT '溢出人数的下线方式（LOGOUT：注销下线；KICKOUT：踢人下线；REPLACED：顶人下线）',
-    `status`               tinyint(1)  UNSIGNED NOT NULL DEFAULT 1 COMMENT '状态（1：启用；2：禁用）',
-    `create_user`          bigint(20)  NOT NULL                    COMMENT '创建人',
-    `create_time`          datetime    NOT NULL                    COMMENT '创建时间',
-    `update_user`          bigint(20)  DEFAULT NULL                COMMENT '修改人',
-    `update_time`          datetime    DEFAULT NULL                COMMENT '修改时间',
-    `deleted`              bigint(20)  NOT NULL DEFAULT 0          COMMENT '是否已删除（0：否；id：是）',
-    PRIMARY KEY (`id`),
-    UNIQUE INDEX `uk_client_id`(`client_id`, `deleted`),
-    INDEX `idx_create_user`(`create_user`),
-    INDEX `idx_update_user`(`update_user`),
-    INDEX `idx_deleted`(`deleted`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='客户端表';
-
-CREATE TABLE IF NOT EXISTS `sys_sms_config`  (
-    `id`              bigint(20)   AUTO_INCREMENT              COMMENT 'ID',
-    `name`            varchar(100) NOT NULL                    COMMENT '名称',
-    `supplier`        varchar(50)  NOT NULL                    COMMENT '厂商',
-    `access_key`      varchar(255) NOT NULL                    COMMENT 'Access Key',
-    `secret_key`      varchar(255) NOT NULL                    COMMENT 'Secret Key',
-    `signature`       varchar(100) DEFAULT NULL                COMMENT '短信签名',
-    `template_id`     varchar(50)  DEFAULT NULL                COMMENT '模板ID',
-    `weight`          int          DEFAULT NULL                COMMENT '负载均衡权重',
-    `retry_interval`  int          DEFAULT NULL                COMMENT '重试间隔（单位：秒）',
-    `max_retries`     int          DEFAULT NULL                COMMENT '重试次数',
-    `maximum`         int          DEFAULT NULL                COMMENT '发送上限',
-    `supplier_config` text         DEFAULT NULL                COMMENT '各个厂商独立配置',
-    `is_default`      bit(1)       NOT NULL DEFAULT b'0'       COMMENT '是否为默认配置',
-    `status`          tinyint(1)   UNSIGNED NOT NULL DEFAULT 1 COMMENT '状态（1：启用；2：禁用）',
-    `create_user`     bigint(20)   NOT NULL                    COMMENT '创建人',
-    `create_time`     datetime     NOT NULL                    COMMENT '创建时间',
-    `update_user`     bigint(20)   DEFAULT NULL                COMMENT '修改人',
-    `update_time`     datetime     DEFAULT NULL                COMMENT '修改时间',
-    `deleted`         bigint(20)   NOT NULL DEFAULT 0          COMMENT '是否已删除（0：否；id：是）',
-    PRIMARY KEY (`id`),
-    INDEX `idx_create_user`(`create_user`),
-    INDEX `idx_update_user`(`update_user`),
-    INDEX `idx_deleted`(`deleted`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='短信配置表';
-
 CREATE TABLE IF NOT EXISTS `sys_sms_log`  (
     `id`          bigint(20)  NOT NULL AUTO_INCREMENT     COMMENT 'ID',
     `config_id`   bigint(20)  NOT NULL                    COMMENT '配置ID',

@@ -48,9 +48,7 @@ import top.continew.admin.common.config.CaptchaProperties;
 import top.continew.admin.common.constant.CacheConstants;
 import top.continew.admin.common.constant.GlobalConstants;
 import top.continew.admin.system.enums.OptionCategoryEnum;
-import top.continew.admin.system.model.entity.SmsConfigDO;
 import top.continew.admin.system.service.OptionService;
-import top.continew.admin.system.service.SmsConfigService;
 import top.continew.starter.cache.redisson.util.RedisUtils;
 import top.continew.starter.captcha.graphic.core.GraphicCaptchaService;
 import top.continew.starter.core.autoconfigure.application.ApplicationProperties;
@@ -91,7 +89,6 @@ public class CaptchaController {
     private final CaptchaProperties captchaProperties;
     private final GraphicCaptchaService graphicCaptchaService;
     private final OptionService optionService;
-    private final SmsConfigService smsConfigService;
 
     @Log(ignore = true)
     @Operation(summary = "获取行为验证码", description = "获取行为验证码（Base64编码）")
@@ -211,11 +208,7 @@ public class CaptchaController {
         // 生成验证码
         String captcha = RandomUtil.randomNumbers(captchaSms.getLength());
         Long expirationInMinutes = captchaSms.getExpirationInMinutes();
-        // 获取短信配置
-        SmsConfigDO smsConfig = smsConfigService.getDefaultConfig();
-        SmsBlend smsBlend = smsConfig != null
-            ? SmsFactory.getSmsBlend(smsConfig.getId().toString())
-            : SmsFactory.getSmsBlend();
+        SmsBlend smsBlend = SmsFactory.getSmsBlend();
         Map<String, String> messageMap = MapUtil.newHashMap(2, true);
         messageMap.put(captchaSms.getCodeKey(), captcha);
         messageMap.put(captchaSms.getTimeKey(), String.valueOf(expirationInMinutes));

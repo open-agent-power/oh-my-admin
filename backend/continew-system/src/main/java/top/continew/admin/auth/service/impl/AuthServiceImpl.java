@@ -34,17 +34,18 @@ import top.continew.admin.auth.service.AuthService;
 import top.continew.admin.common.context.RoleContext;
 import top.continew.admin.common.enums.DisEnableStatusEnum;
 import top.continew.admin.system.constant.SystemConstants;
+import top.continew.admin.system.enums.LogoutModeEnum;
 import top.continew.admin.system.enums.MenuTypeEnum;
+import top.continew.admin.system.enums.ReplacedRangeEnum;
 import top.continew.admin.system.model.resp.ClientResp;
 import top.continew.admin.system.model.resp.MenuResp;
-import top.continew.admin.system.service.ClientService;
 import top.continew.admin.system.service.MenuService;
 import top.continew.admin.system.service.RoleService;
-import top.continew.starter.core.util.validation.ValidationUtils;
 import top.continew.starter.extension.crud.annotation.TreeField;
 import top.continew.starter.extension.crud.autoconfigure.CrudProperties;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -60,7 +61,6 @@ import java.util.Set;
 public class AuthServiceImpl implements AuthService {
 
     private final LoginHandlerFactory loginHandlerFactory;
-    private final ClientService clientService;
     private final RoleService roleService;
     private final MenuService menuService;
     private final CrudProperties crudProperties;
@@ -68,12 +68,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public LoginResp login(LoginReq req, HttpServletRequest request) {
         AuthTypeEnum authType = req.getAuthType();
-        // 校验客户端
-        ClientResp client = clientService.getByClientId(req.getClientId());
-        ValidationUtils.throwIfNull(client, "客户端不存在");
-        ValidationUtils.throwIf(DisEnableStatusEnum.DISABLE.equals(client.getStatus()), "客户端已禁用");
-        ValidationUtils.throwIf(!client.getAuthType().contains(authType.getValue()), "该客户端暂未授权 [{}] 认证", authType
-            .getDescription());
+        ClientResp client = this.buildDefaultClient(req);
         // 获取处理器
         LoginHandler<LoginReq> loginHandler = loginHandlerFactory.getHandler(authType);
         // 登录前置处理
@@ -83,6 +78,21 @@ public class AuthServiceImpl implements AuthService {
         // 登录后置处理
         loginHandler.postLogin(req, client, request);
         return loginResp;
+    }
+
+    private ClientResp buildDefaultClient(LoginReq req) {
+        ClientResp client = new ClientResp();
+        client.setClientId(req.getClientId());
+        client.setClientType("PC");
+        client.setAuthType(Arrays.stream(AuthTypeEnum.values()).map(AuthTypeEnum::getValue).toList());
+        client.setActiveTimeout(1800L);
+        client.setTimeout(86400L);
+        client.setIsConcurrent(true);
+        client.setReplacedRange(ReplacedRangeEnum.ALL_DEVICE_TYPE);
+        client.setMaxLoginCount(-1);
+        client.setOverflowLogoutMode(LogoutModeEnum.KICKOUT);
+        client.setStatus(DisEnableStatusEnum.ENABLE);
+        return client;
     }
 
     @Override

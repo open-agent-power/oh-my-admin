@@ -66,7 +66,6 @@ public class DemoEnvironmentJob {
     private final MenuMapper menuMapper;
     private final DeptMapper deptMapper;
     private final AppMapper appMapper;
-    private final ClientMapper clientsMapper;
     private final TenantMapper tenantMapper;
     private final PackageMapper packageMapper;
     private final PackageMenuMapper packageMenuMapper;
@@ -107,8 +106,6 @@ public class DemoEnvironmentJob {
             this.log(deptCount, "部门");
             Long appCount = appMapper.lambdaQuery().gt(AppDO::getId, DELETE_FLAG).count();
             this.log(appCount, "应用");
-            Long clientCount = clientsMapper.lambdaQuery().gt(ClientDO::getId, DELETE_FLAG).count();
-            this.log(clientCount, "客户端");
             Long tenantCount = tenantMapper.lambdaQuery().count();
             this.log(tenantCount, "租户");
             Long packageCount = packageMapper.lambdaQuery().count();
@@ -143,9 +140,6 @@ public class DemoEnvironmentJob {
                 .remove());
             this.clean(deptCount, "部门", null, () -> deptMapper.lambdaUpdate().gt(DeptDO::getId, DEPT_FLAG).remove());
             this.clean(appCount, "应用", null, () -> appMapper.lambdaUpdate().gt(AppDO::getId, DEPT_FLAG).remove());
-            this.clean(clientCount, "客户端", null, () -> clientsMapper.lambdaUpdate()
-                .gt(ClientDO::getId, DEPT_FLAG)
-                .remove());
             this.clean(tenantCount, "租户", null, () -> tenantMapper.lambdaUpdate().remove());
             this.clean(packageCount, "套餐", null, () -> packageMapper.lambdaUpdate().remove());
             SnailJobLog.REMOTE.info("演示环境数据已清理完成。");

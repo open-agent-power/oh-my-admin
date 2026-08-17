@@ -224,9 +224,7 @@ continew-starter.tenant:
     - sys_dict_item # 字典项表
     - sys_option # 参数表
     - sys_storage # 存储表
-    - sys_sms_config # 短信配置表
     - sys_sms_log # 短信日志表
-    - sys_client # 客户端表
     - sys_app # 应用表
   # 忽略菜单 ID（租户不能使用的菜单）
   ignore-menus:
@@ -251,7 +249,7 @@ sa-token:
   token-name: Authorization
   # 是否启用动态 activeTimeout 功能
   dynamic-active-timeout: true
-  ## 提示：请通过页面功能 [系统管理/系统配置/客户端配置] 动态调整下方注释的配置项
+  ## 提示：请通过配置文件动态调整下方注释的配置项
   ## 如果不需要动态配置，请取消下方配置注释，再移除相关登录处理代码
 #  # Token 有效期（单位：秒，默认 30 天，-1 代表永不过期）
 #  timeout: 86400

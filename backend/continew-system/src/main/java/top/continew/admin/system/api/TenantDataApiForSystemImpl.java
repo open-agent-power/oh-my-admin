@@ -70,8 +70,6 @@ public class TenantDataApiForSystemImpl implements TenantDataApi {
     private final RoleMapper roleMapper;
     private final RoleMenuMapper roleMenuMapper;
     private final LogMapper logMapper;
-    private final MessageMapper messageMapper;
-    private final MessageMapper messageUserMapper;
     private final NoticeMapper noticeMapper;
     private final RoleDeptMapper roleDeptMapper;
     private final UserMapper userMapper;
@@ -118,9 +116,6 @@ public class TenantDataApiForSystemImpl implements TenantDataApi {
         }
         // 日志清除
         logMapper.delete(queryWrapper);
-        // 消息清除
-        messageMapper.delete(queryWrapper);
-        messageUserMapper.delete(queryWrapper);
         // 通知清除
         noticeMapper.delete(queryWrapper);
         // 角色相关数据清除

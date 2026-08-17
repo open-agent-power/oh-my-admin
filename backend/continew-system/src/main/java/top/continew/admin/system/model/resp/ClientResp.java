@@ -21,8 +21,6 @@ import cn.idev.excel.annotation.ExcelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import top.continew.admin.common.base.model.resp.BaseDetailResp;
-import top.continew.admin.common.config.excel.DictExcelProperty;
-import top.continew.admin.common.config.excel.ExcelDictConverter;
 import top.continew.admin.common.enums.DisEnableStatusEnum;
 import top.continew.admin.system.enums.LogoutModeEnum;
 import top.continew.admin.system.enums.ReplacedRangeEnum;
@@ -55,11 +53,10 @@ public class ClientResp extends BaseDetailResp {
     private String clientId;
 
     /**
-     * 客户端类型（取值于字典 client_type
+     * 客户端类型
      */
-    @Schema(description = "客户端类型（取值于字典 client_type）", example = "PC")
-    @ExcelProperty(value = "客户端类型", converter = ExcelDictConverter.class, order = 5)
-    @DictExcelProperty("client_type")
+    @Schema(description = "客户端类型", example = "PC")
+    @ExcelProperty(value = "客户端类型", order = 5)
     private String clientType;
 
     /**
