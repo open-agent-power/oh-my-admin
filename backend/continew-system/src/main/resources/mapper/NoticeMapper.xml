@@ -77,24 +77,4 @@
         </if>
         AND t2.read_time IS NULL
     </select>
-
-    <select id="selectDashboardList"
-            resultType="top.continew.admin.system.model.resp.dashboard.DashboardNoticeResp">
-        SELECT
-            t1.id, t1.title, t1.type, t1.is_top
-        FROM sys_notice AS t1
-        WHERE t1.deleted = 0 AND t1.status = 3
-        <if test="userId != null">
-            <choose>
-                <when test="_databaseId == 'mysql'">
-                    AND (t1.notice_scope = 1 OR (t1.notice_scope = 2 AND JSON_CONTAINS(t1.notice_users, CONCAT('"', #{userId}, '"'))))
-                </when>
-                <when test="_databaseId == 'pgsql'">
-                    AND (t1.notice_scope = 1 OR (t1.notice_scope = 2 AND t1.notice_users::jsonb @> jsonb_build_array(#{userId}::text)))
-                </when>
-            </choose>
-        </if>
-        ORDER BY t1.is_top DESC, t1.publish_time DESC
-        LIMIT 5
-    </select>
 </mapper>

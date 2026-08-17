@@ -21,7 +21,6 @@ import top.continew.admin.system.enums.NoticeMethodEnum;
 import top.continew.admin.system.model.entity.NoticeDO;
 import top.continew.admin.system.model.query.NoticeQuery;
 import top.continew.admin.system.model.req.NoticeReq;
-import top.continew.admin.system.model.resp.dashboard.DashboardNoticeResp;
 import top.continew.admin.system.model.resp.notice.NoticeDetailResp;
 import top.continew.admin.system.model.resp.notice.NoticeResp;
 import top.continew.starter.data.service.IService;
@@ -60,10 +59,4 @@ public interface NoticeService extends BaseService<NoticeResp, NoticeDetailResp,
      */
     void readNotice(Long id, Long userId);
 
-    /**
-     * 查询仪表盘公告列表
-     *
-     * @return 仪表盘公告列表
-     */
-    List<DashboardNoticeResp> listDashboard();
 }

@@ -22,14 +22,12 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import top.continew.admin.common.base.service.BaseServiceImpl;
-import top.continew.admin.common.context.UserContextHolder;
 import top.continew.admin.system.enums.*;
 import top.continew.admin.system.mapper.NoticeMapper;
 import top.continew.admin.system.model.entity.NoticeDO;
 import top.continew.admin.system.model.query.NoticeQuery;
 import top.continew.admin.system.model.req.MessageReq;
 import top.continew.admin.system.model.req.NoticeReq;
-import top.continew.admin.system.model.resp.dashboard.DashboardNoticeResp;
 import top.continew.admin.system.model.resp.notice.NoticeDetailResp;
 import top.continew.admin.system.model.resp.notice.NoticeResp;
 import top.continew.admin.system.service.MessageService;
@@ -166,9 +164,4 @@ public class NoticeServiceImpl extends BaseServiceImpl<NoticeMapper, NoticeDO, N
         noticeLogService.add(List.of(userId), id);
     }
 
-    @Override
-    public List<DashboardNoticeResp> listDashboard() {
-        Long userId = UserContextHolder.getUserId();
-        return baseMapper.selectDashboardList(userId);
-    }
 }

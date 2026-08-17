@@ -5,14 +5,7 @@
         <Welcome />
       </div>
       <div style="margin-top: 14px">
-        <a-grid :cols="24" :col-gap="14" :row-gap="14">
-          <a-grid-item :span="24">
-            <Project />
-          </a-grid-item>
-          <a-grid-item :span="24">
-            <LatestActivity />
-          </a-grid-item>
-        </a-grid>
+        <Project />
       </div>
     </div>
     <div class="right-side">
@@ -26,9 +19,6 @@
           <Carousel />
         </a-grid-item>
         <a-grid-item class="panel" :span="24">
-          <Notice />
-        </a-grid-item>
-        <a-grid-item class="panel" :span="24">
           <Docs />
         </a-grid-item>
       </a-grid>
@@ -39,10 +29,8 @@
 <script setup lang="ts">
 import Welcome from './components/Welcome.vue'
 import Project from './components/Project.vue'
-import LatestActivity from './components/LatestActivity.vue'
 import QuickOperation from './components/QuickOperation.vue'
 import Carousel from './components/Carousel.vue'
-import Notice from './components/Notice.vue'
 import Docs from './components/Docs.vue'
 
 defineOptions({ name: 'Workplace' })

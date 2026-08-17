@@ -32,7 +32,6 @@ import org.springframework.web.bind.annotation.RestController;
 import top.continew.admin.common.constant.CacheConstants;
 import top.continew.admin.system.model.resp.dashboard.DashboardAccessTrendResp;
 import top.continew.admin.system.model.resp.dashboard.DashboardChartCommonResp;
-import top.continew.admin.system.model.resp.dashboard.DashboardNoticeResp;
 import top.continew.admin.system.model.resp.dashboard.DashboardOverviewCommonResp;
 import top.continew.admin.system.service.DashboardService;
 import top.continew.starter.core.util.validation.ValidationUtils;
@@ -55,12 +54,6 @@ import java.util.List;
 public class DashboardController {
 
     private final DashboardService dashboardService;
-
-    @Operation(summary = "查询公告列表", description = "查询公告列表")
-    @GetMapping("/notice")
-    public List<DashboardNoticeResp> listNotice() {
-        return dashboardService.listNotice();
-    }
 
     @Operation(summary = "查询PV总览", description = "查询PV总览")
     @GetMapping("/analysis/overview/pv")
