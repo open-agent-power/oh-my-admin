@@ -80,12 +80,6 @@ ALTER TABLE `sys_role_dept`
 ALTER TABLE `sys_log`
     ADD COLUMN `tenant_id` BIGINT NOT NULL DEFAULT 0 COMMENT '租户ID',
     ADD INDEX `idx_tenant_id` (`tenant_id`);
-ALTER TABLE `sys_message`
-    ADD COLUMN `tenant_id` BIGINT NOT NULL DEFAULT 0 COMMENT '租户ID',
-    ADD INDEX `idx_tenant_id` (`tenant_id`);
-ALTER TABLE `sys_message_log`
-    ADD COLUMN `tenant_id` BIGINT NOT NULL DEFAULT 0 COMMENT '租户ID',
-    ADD INDEX `idx_tenant_id` (`tenant_id`);
 ALTER TABLE `sys_notice`
     ADD COLUMN `tenant_id` BIGINT NOT NULL DEFAULT 0 COMMENT '租户ID',
     ADD INDEX `idx_tenant_id` (`tenant_id`);

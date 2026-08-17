@@ -230,28 +230,6 @@ CREATE TABLE IF NOT EXISTS `sys_log` (
     INDEX `idx_create_time`(`create_time`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='系统日志表';
 
-CREATE TABLE IF NOT EXISTS `sys_message` (
-    `id`          bigint(20)   AUTO_INCREMENT              COMMENT 'ID',
-    `title`       varchar(50)  NOT NULL                    COMMENT '标题',
-    `content`     text         DEFAULT NULL                COMMENT '内容',
-    `type`        tinyint(1)   UNSIGNED NOT NULL DEFAULT 1 COMMENT '类型（1：系统消息；2：安全消息）',
-    `path`        varchar(255) DEFAULT NULL                COMMENT '跳转路径',
-    `scope`       tinyint(1)   UNSIGNED NOT NULL DEFAULT 1 COMMENT '通知范围（1：所有人；2：指定用户）',
-    `users`       json         DEFAULT NULL                COMMENT '通知用户',
-    `create_time` datetime     NOT NULL                    COMMENT '创建时间',
-    `update_time` datetime     DEFAULT NULL                COMMENT '修改时间',
-    `deleted`     bigint(20)   NOT NULL DEFAULT 0          COMMENT '是否已删除（0：否；id：是）',
-    PRIMARY KEY (`id`),
-    INDEX `idx_deleted`(`deleted`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='消息表';
-
-CREATE TABLE IF NOT EXISTS `sys_message_log` (
-    `message_id` bigint(20) NOT NULL     COMMENT '消息ID',
-    `user_id`    bigint(20) NOT NULL     COMMENT '用户ID',
-    `read_time`  datetime   DEFAULT NULL COMMENT '读取时间',
-    PRIMARY KEY (`message_id`, `user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='消息日志表';
-
 CREATE TABLE IF NOT EXISTS `sys_notice` (
     `id`             bigint(20)   AUTO_INCREMENT              COMMENT 'ID',
     `title`          varchar(150) NOT NULL                    COMMENT '标题',
@@ -259,7 +237,7 @@ CREATE TABLE IF NOT EXISTS `sys_notice` (
     `type`           varchar(30)  NOT NULL                    COMMENT '分类',
     `notice_scope`   tinyint(1)   UNSIGNED NOT NULL DEFAULT 1 COMMENT '通知范围（1：所有人；2：指定用户）',
     `notice_users`   json         DEFAULT NULL                COMMENT '通知用户',
-    `notice_methods` json         DEFAULT NULL                COMMENT '通知方式（1：系统消息；2：登录弹窗）',
+    `notice_methods` json         DEFAULT NULL                COMMENT '通知方式（2：登录弹窗）',
     `is_timing`      bit(1)       NOT NULL DEFAULT b'0'       COMMENT '是否定时',
     `publish_time`   datetime     DEFAULT NULL                COMMENT '发布时间',
     `is_top`         bit(1)       NOT NULL DEFAULT b'0'       COMMENT '是否置顶',

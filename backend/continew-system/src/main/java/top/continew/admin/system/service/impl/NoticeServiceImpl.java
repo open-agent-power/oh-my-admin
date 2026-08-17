@@ -26,11 +26,9 @@ import top.continew.admin.system.enums.*;
 import top.continew.admin.system.mapper.NoticeMapper;
 import top.continew.admin.system.model.entity.NoticeDO;
 import top.continew.admin.system.model.query.NoticeQuery;
-import top.continew.admin.system.model.req.MessageReq;
 import top.continew.admin.system.model.req.NoticeReq;
 import top.continew.admin.system.model.resp.notice.NoticeDetailResp;
 import top.continew.admin.system.model.resp.notice.NoticeResp;
-import top.continew.admin.system.service.MessageService;
 import top.continew.admin.system.service.NoticeLogService;
 import top.continew.admin.system.service.NoticeService;
 import top.continew.starter.core.util.validation.CheckUtils;
@@ -51,7 +49,6 @@ import java.util.List;
 public class NoticeServiceImpl extends BaseServiceImpl<NoticeMapper, NoticeDO, NoticeResp, NoticeDetailResp, NoticeQuery, NoticeReq> implements NoticeService {
 
     private final NoticeLogService noticeLogService;
-    private final MessageService messageService;
 
     @Override
     public PageResp<NoticeResp> page(NoticeQuery query, PageQuery pageQuery) {
@@ -73,14 +70,6 @@ public class NoticeServiceImpl extends BaseServiceImpl<NoticeMapper, NoticeDO, N
                 req.setStatus(NoticeStatusEnum.PUBLISHED);
                 req.setPublishTime(LocalDateTime.now());
             }
-        }
-    }
-
-    @Override
-    public void afterCreate(NoticeReq req, NoticeDO entity) {
-        // 发送消息
-        if (NoticeStatusEnum.PUBLISHED.equals(entity.getStatus())) {
-            this.publish(entity);
         }
     }
 
@@ -128,30 +117,12 @@ public class NoticeServiceImpl extends BaseServiceImpl<NoticeMapper, NoticeDO, N
             .getIsTiming()) && entity.getPublishTime() != null) {
             baseMapper.lambdaUpdate().set(NoticeDO::getPublishTime, null).eq(NoticeDO::getId, entity.getId()).update();
         }
-        // 发送消息
-        if (Boolean.FALSE.equals(entity.getIsTiming()) && NoticeStatusEnum.PUBLISHED.equals(entity.getStatus())) {
-            this.publish(entity);
-        }
     }
 
     @Override
     public void afterDelete(List<Long> ids) {
         // 删除公告日志
         noticeLogService.deleteByNoticeIds(ids);
-    }
-
-    @Override
-    public void publish(NoticeDO notice) {
-        List<Integer> noticeMethods = notice.getNoticeMethods();
-        if (CollUtil.isNotEmpty(noticeMethods) && noticeMethods.contains(NoticeMethodEnum.SYSTEM_MESSAGE.getValue())) {
-            MessageTemplateEnum template = MessageTemplateEnum.NOTICE_PUBLISH;
-            MessageReq req = new MessageReq(MessageTypeEnum.SYSTEM);
-            req.setTitle(template.getTitle());
-            req.setContent(template.getContent().formatted(notice.getTitle()));
-            req.setPath(template.getPath().formatted(notice.getId()));
-            // 新增消息
-            messageService.add(req, notice.getNoticeUsers());
-        }
     }
 
     @Override

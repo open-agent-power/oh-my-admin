@@ -16,7 +16,6 @@
 
 package top.continew.admin.job;
 
-import cn.hutool.core.collection.CollUtil;
 import cn.hutool.extra.spring.SpringUtil;
 import com.aizuda.snailjob.client.job.core.annotation.JobExecutor;
 import com.aizuda.snailjob.common.log.SnailJobLog;
@@ -27,11 +26,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import top.continew.admin.schedule.annotation.ConditionalOnEnabledScheduleJob;
-import top.continew.admin.system.enums.NoticeMethodEnum;
 import top.continew.admin.system.enums.NoticeStatusEnum;
 import top.continew.admin.system.mapper.NoticeMapper;
 import top.continew.admin.system.model.entity.NoticeDO;
-import top.continew.admin.system.service.NoticeService;
 import top.continew.starter.core.constant.PropertiesConstants;
 import top.continew.starter.core.util.CollUtils;
 import top.continew.starter.extension.tenant.annotation.TenantIgnore;
@@ -94,18 +91,8 @@ public class NoticePublishJob {
             .eq(NoticeDO::getStatus, NoticeStatusEnum.PENDING)
             .le(NoticeDO::getPublishTime, LocalDateTime.now())
             .list();
-        if (CollUtil.isEmpty(list)) {
+        if (list.isEmpty()) {
             return;
-        }
-        // 筛选需要发送消息的公告并发送
-        List<NoticeDO> needSendMessageList = list.stream()
-            .filter(notice -> CollUtil.isNotEmpty(notice.getNoticeMethods()))
-            .filter(notice -> notice.getNoticeMethods().contains(NoticeMethodEnum.SYSTEM_MESSAGE.getValue()))
-            .toList();
-        if (CollUtil.isNotEmpty(needSendMessageList)) {
-            // 发送消息
-            NoticeService noticeService = SpringUtil.getBean(NoticeService.class);
-            needSendMessageList.parallelStream().forEach(noticeService::publish);
         }
         // 更新状态
         noticeMapper.lambdaUpdate()

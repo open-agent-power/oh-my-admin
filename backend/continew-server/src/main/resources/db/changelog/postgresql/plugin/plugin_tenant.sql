@@ -120,14 +120,6 @@ ALTER TABLE "sys_log" ADD COLUMN "tenant_id" int8 NOT NULL DEFAULT 0;
 COMMENT ON COLUMN "sys_log"."tenant_id" IS '租户ID';
 CREATE INDEX "idx_log_tenant_id" ON "sys_log" ("tenant_id");
 
-ALTER TABLE "sys_message" ADD COLUMN "tenant_id" int8 NOT NULL DEFAULT 0;
-COMMENT ON COLUMN "sys_message"."tenant_id" IS '租户ID';
-CREATE INDEX "idx_message_tenant_id" ON "sys_message" ("tenant_id");
-
-ALTER TABLE "sys_message_log" ADD COLUMN "tenant_id" int8 NOT NULL DEFAULT 0;
-COMMENT ON COLUMN "sys_message_log"."tenant_id" IS '租户ID';
-CREATE INDEX "idx_message_log_tenant_id" ON "sys_message_log" ("tenant_id");
-
 ALTER TABLE "sys_notice" ADD COLUMN "tenant_id" int8 NOT NULL DEFAULT 0;
 COMMENT ON COLUMN "sys_notice"."tenant_id" IS '租户ID';
 CREATE INDEX "idx_notice_tenant_id" ON "sys_notice" ("tenant_id");

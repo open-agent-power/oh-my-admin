@@ -377,43 +377,6 @@ COMMENT ON COLUMN "sys_log"."create_user"      IS '创建人';
 COMMENT ON COLUMN "sys_log"."create_time"      IS '创建时间';
 COMMENT ON TABLE  "sys_log"                    IS '系统日志表';
 
-CREATE TABLE IF NOT EXISTS "sys_message" (
-    "id"          int8         NOT NULL,
-    "title"       varchar(50)  NOT NULL,
-    "content"     text         DEFAULT NULL,
-    "type"        int2         NOT NULL DEFAULT 1,
-    "path"        varchar(255) DEFAULT NULL,
-    "scope"       int2         NOT NULL DEFAULT 1,
-    "users"       json         DEFAULT NULL,
-    "create_time" timestamp    NOT NULL,
-    "update_time" timestamp    DEFAULT NULL,
-    "deleted"     int8         NOT NULL DEFAULT 0,
-    PRIMARY KEY ("id")
-);
-CREATE INDEX "idx_message_deleted" ON "sys_message" ("deleted");
-COMMENT ON COLUMN "sys_message"."id"          IS 'ID';
-COMMENT ON COLUMN "sys_message"."title"       IS '标题';
-COMMENT ON COLUMN "sys_message"."content"     IS '内容';
-COMMENT ON COLUMN "sys_message"."type"        IS '类型（1：系统消息；2：安全消息）';
-COMMENT ON COLUMN "sys_message"."path"        IS '跳转路径';
-COMMENT ON COLUMN "sys_message"."scope"       IS '通知范围（1：所有人；2：指定用户）';
-COMMENT ON COLUMN "sys_message"."users"       IS '通知用户';
-COMMENT ON COLUMN "sys_message"."create_time" IS '创建时间';
-COMMENT ON COLUMN "sys_message"."update_time" IS '修改时间';
-COMMENT ON COLUMN "sys_message"."deleted"     IS '是否已删除（0：否；id：是）';
-COMMENT ON TABLE  "sys_message"               IS '消息表';
-
-CREATE TABLE IF NOT EXISTS "sys_message_log" (
-    "message_id" int8      NOT NULL,
-    "user_id"    int8      NOT NULL,
-    "read_time"  timestamp DEFAULT NULL,
-    PRIMARY KEY ("message_id", "user_id")
-);
-COMMENT ON COLUMN "sys_message_log"."message_id" IS '消息ID';
-COMMENT ON COLUMN "sys_message_log"."user_id"    IS '用户ID';
-COMMENT ON COLUMN "sys_message_log"."read_time"  IS '读取时间';
-COMMENT ON TABLE  "sys_message_log"              IS '消息日志表';
-
 CREATE TABLE IF NOT EXISTS "sys_notice" (
     "id"             int8         NOT NULL,
     "title"          varchar(150) NOT NULL,
@@ -442,7 +405,7 @@ COMMENT ON COLUMN "sys_notice"."content"        IS '内容';
 COMMENT ON COLUMN "sys_notice"."type"           IS '分类';
 COMMENT ON COLUMN "sys_notice"."notice_scope"   IS '通知范围（1：所有人；2：指定用户）';
 COMMENT ON COLUMN "sys_notice"."notice_users"   IS '通知用户';
-COMMENT ON COLUMN "sys_notice"."notice_methods" IS '通知方式（1：系统消息；2：登录弹窗）';
+COMMENT ON COLUMN "sys_notice"."notice_methods" IS '通知方式（2：登录弹窗）';
 COMMENT ON COLUMN "sys_notice"."is_timing"      IS '是否定时';
 COMMENT ON COLUMN "sys_notice"."publish_time"   IS '发布时间';
 COMMENT ON COLUMN "sys_notice"."is_top"         IS '是否置顶';

@@ -36,13 +36,6 @@ import java.util.List;
 public interface NoticeService extends BaseService<NoticeResp, NoticeDetailResp, NoticeQuery, NoticeReq>, IService<NoticeDO> {
 
     /**
-     * 发布公告
-     *
-     * @param notice 公告信息
-     */
-    void publish(NoticeDO notice);
-
-    /**
      * 查询未读公告 ID 列表
      *
      * @param method 通知方式
