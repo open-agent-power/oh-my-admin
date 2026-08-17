@@ -73,14 +73,6 @@ const initData = () => {
         jumpMode: 'link',
         status: socialList.value.includes('GITHUB'),
       },
-      {
-        title: '绑定微信',
-        icon: 'wechat',
-        subtitle: `${socialList.value.includes('WECHAT_OPEN') ? '' : '绑定后，'}可通过微信进行登录`,
-        type: 'wechat_open',
-        jumpMode: 'link',
-        status: socialList.value.includes('WECHAT_OPEN'),
-      },
     ]
   })
 }

@@ -226,10 +226,6 @@ continew-starter.messaging.websocket:
 continew-starter.justauth:
   enabled: true
   type:
-    WECHAT_OPEN:
-      client-id: wx4a**********bcc2
-      client-secret: 32e5*************************1ef
-      redirect-uri: ${application.url}/social/callback?source=wechat_open
     GITEE:
       client-id: 5d271b7f638941812aaf8bfc2e2f08f06d6235ef934e0e39537e2364eb8452c4
       client-secret: 1f7d08**********5b7**********29e

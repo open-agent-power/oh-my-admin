@@ -30,11 +30,6 @@ import lombok.RequiredArgsConstructor;
 public enum SocialSourceEnum {
 
     /**
-     * 微信
-     */
-    WECHAT_OPEN("微信"),
-
-    /**
      * 码云
      */
     GITEE("码云"),

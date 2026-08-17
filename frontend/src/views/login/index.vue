@@ -35,9 +35,6 @@
               <a class="item" title="使用 GitHub 账号登录" @click="onOauth('github')">
                 <GiSvgIcon name="github" :size="24" />
               </a>
-              <a class="item" title="使用微信账号登录" @click="onOauth('wechat_open')">
-                <GiSvgIcon name="wechat" :size="24" />
-              </a>
             </div>
           </div>
         </div>
@@ -86,9 +83,6 @@
         </a>
         <a class="item" title="使用 GitHub 账号登录" @click="onOauth('github')">
           <GiSvgIcon name="github" :size="24" />
-        </a>
-        <a class="item" title="使用微信账号登录" @click="onOauth('wechat_open')">
-          <GiSvgIcon name="wechat" :size="24" />
         </a>
       </div>
     </div>
