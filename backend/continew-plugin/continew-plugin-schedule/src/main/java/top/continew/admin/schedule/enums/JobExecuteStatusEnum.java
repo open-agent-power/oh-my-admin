@@ -16,8 +16,6 @@
 
 package top.continew.admin.schedule.enums;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import top.continew.admin.common.constant.UiConstants;
 import top.continew.starter.core.enums.BaseEnum;
 
@@ -27,8 +25,6 @@ import top.continew.starter.core.enums.BaseEnum;
  * @author Charles7c
  * @since 2024/7/11 22:28
  */
-@Getter
-@RequiredArgsConstructor
 public enum JobExecuteStatusEnum implements BaseEnum<Integer> {
 
     /**
@@ -64,4 +60,24 @@ public enum JobExecuteStatusEnum implements BaseEnum<Integer> {
     private final Integer value;
     private final String description;
     private final String color;
+
+    JobExecuteStatusEnum(Integer value, String description, String color) {
+        this.value = value;
+        this.description = description;
+        this.color = color;
+    }
+
+    @Override
+    public Integer getValue() {
+        return value;
+    }
+
+    @Override
+    public String getDescription() {
+        return description;
+    }
+
+    public String getColor() {
+        return color;
+    }
 }

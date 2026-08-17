@@ -17,7 +17,6 @@
 package top.continew.admin.schedule.model;
 
 import com.aizuda.snailjob.common.core.model.Result;
-import lombok.Data;
 
 /**
  * 任务调度服务端分页响应参数
@@ -26,7 +25,6 @@ import lombok.Data;
  * @author Charles7c
  * @since 2024/6/26 22:27
  */
-@Data
 public class JobPageResult<T> extends Result<T> {
 
     /**
@@ -43,4 +41,28 @@ public class JobPageResult<T> extends Result<T> {
      * 总条数
      */
     private long total;
+
+    public long getPage() {
+        return page;
+    }
+
+    public void setPage(long page) {
+        this.page = page;
+    }
+
+    public long getSize() {
+        return size;
+    }
+
+    public void setSize(long size) {
+        this.size = size;
+    }
+
+    public long getTotal() {
+        return total;
+    }
+
+    public void setTotal(long total) {
+        this.total = total;
+    }
 }

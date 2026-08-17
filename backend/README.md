@@ -153,7 +153,6 @@ public class DeptController extends BaseController<DeptService, DeptResp, DeptDe
   - 存储配置：管理文件存储配置，支持本地存储、兼容 S3 协议对象存储
 - 在线用户：管理当前登录用户，可一键踢除下线
 - 日志管理：管理系统登录日志、操作日志，支持查看日志详情，包含请求头、响应头等报文信息
-- 任务管理：管理系统定时任务，包含新增、修改、删除、执行功能，支持 Cron（可配置式生成 Cron 表达式） 和固定频率
 - 任务日志：管理定时任务执行日志，包含停止、重试指定批次等功能
 - 代码生成：提供根据数据库表自动生成相应的前后端 CRUD 代码的功能，支持同步最新表结构及代码生成预览
 
@@ -292,8 +291,7 @@ continew-admin
 │  │  │  │  │  ├─ log（操作日志配置）
 │  │  │  │  │  └─ satoken（SaToken 认证配置）
 │  │  │  │  ├─ controller（通用 API）
-│  │  │  │  ├─ job （定时任务）
-│  │  │  │  └─ ContiNewAdminApplication.java（ContiNew Admin 启动程序）
+│  │  │  │  │  └─ ContiNewAdminApplication.java（ContiNew Admin 启动程序）
 │  │  │  └─ resources
 │  │  │     ├─ config（核心配置目录）
 │  │  │     │  ├─ application-dev.yml（开发环境配置文件）
@@ -549,3 +547,4 @@ ContiNew 系列项目采用清晰的分支策略，确保开发与维护有序�
 ## GitHub Star 趋势
 
 ![GitHub Star 趋势](https://starchart.cc/charles7c/continew-admin.svg)
+

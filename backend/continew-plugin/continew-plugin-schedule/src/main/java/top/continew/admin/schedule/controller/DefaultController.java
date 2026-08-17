@@ -30,7 +30,7 @@ import top.continew.starter.web.model.R;
  */
 @RestController
 @ConditionalOnDisabledScheduleJob
-@RequestMapping({"/schedule/job", "/schedule/log"})
+@RequestMapping("/schedule/log")
 public class DefaultController {
 
     @RequestMapping("/**")

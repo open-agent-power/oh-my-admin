@@ -16,8 +16,6 @@
 
 package top.continew.admin.schedule.enums;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import top.continew.starter.core.enums.BaseEnum;
 
 /**
@@ -26,8 +24,6 @@ import top.continew.starter.core.enums.BaseEnum;
  * @author Charles7c
  * @since 2024/7/11 22:28
  */
-@Getter
-@RequiredArgsConstructor
 public enum JobExecuteReasonEnum implements BaseEnum<Integer> {
 
     /**
@@ -132,4 +128,19 @@ public enum JobExecuteReasonEnum implements BaseEnum<Integer> {
 
     private final Integer value;
     private final String description;
+
+    JobExecuteReasonEnum(Integer value, String description) {
+        this.value = value;
+        this.description = description;
+    }
+
+    @Override
+    public Integer getValue() {
+        return value;
+    }
+
+    @Override
+    public String getDescription() {
+        return description;
+    }
 }

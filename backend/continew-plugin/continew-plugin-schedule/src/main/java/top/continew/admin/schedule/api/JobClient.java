@@ -30,8 +30,6 @@ import cn.hutool.json.JSONUtil;
 import cn.hutool.jwt.JWTUtil;
 import cn.hutool.jwt.RegisteredPayload;
 import com.aizuda.snailjob.common.core.model.Result;
-import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
 import top.continew.admin.schedule.constant.JobConstants;
 import top.continew.admin.schedule.exception.ScheduleClientException;
 import top.continew.admin.schedule.exception.ScheduleServerException;
@@ -50,10 +48,9 @@ import java.util.function.Supplier;
  * @author Charles7c
  * @since 2024/7/4 23:07
  */
-@Slf4j
-@Data
 public class JobClient {
 
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(JobClient.class);
     public static final Integer STATUS_SUCCESS = 1;
     private static final String AUTH_URL = "/auth/login";
     private final String url;
@@ -67,6 +64,18 @@ public class JobClient {
         this.url = url;
         this.username = username;
         this.password = password;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     /**
