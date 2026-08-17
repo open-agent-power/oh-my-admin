@@ -318,16 +318,3 @@ CREATE TABLE IF NOT EXISTS `sys_file` (
     INDEX `idx_deleted`(`deleted`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='文件表';
 
-CREATE TABLE IF NOT EXISTS `sys_sms_log`  (
-    `id`          bigint(20)  NOT NULL AUTO_INCREMENT     COMMENT 'ID',
-    `config_id`   bigint(20)  NOT NULL                    COMMENT '配置ID',
-    `phone`       varchar(25) NOT NULL                    COMMENT '手机号',
-    `params`      text        DEFAULT NULL                COMMENT '参数配置',
-    `status`      tinyint(1)  UNSIGNED NOT NULL DEFAULT 1 COMMENT '发送状态（1：成功；2：失败）',
-    `res_msg`     text        DEFAULT NULL                COMMENT '返回数据',
-    `create_user` bigint(20)  NOT NULL                    COMMENT '创建人',
-    `create_time` datetime    NOT NULL                    COMMENT '创建时间',
-    PRIMARY KEY (`id`),
-    INDEX `idx_config_id`(`config_id`),
-    INDEX `idx_create_user`(`create_user`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='短信日志表';

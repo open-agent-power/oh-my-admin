@@ -111,10 +111,6 @@ VALUES
 (2032, '详情', 2030, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'monitor:log:get', 2, 1, 1, NOW()),
 (2033, '导出', 2030, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'monitor:log:export', 3, 1, 1, NOW()),
 
-(2050, '短信日志', 2000, 2, '/system/sms/log', 'SystemSmsLog', 'monitor/sms/log/index', NULL, 'message', b'0', b'0', b'0', NULL, 3, 1, 1, NOW()),
-(2051, '列表', 2050, 3, NULL, NULL, NULL, NULL, NULL, b'0', b'0', b'0', 'system:smsLog:list', 1, 1, 1, NOW()),
-(2052, '删除', 2050, 3, NULL, NULL, NULL, NULL, NULL, b'0', b'0', b'0', 'system:smsLog:delete', 2, 1, 1, NOW()),
-(2053, '导出', 2050, 3, NULL, NULL, NULL, NULL, NULL, b'0', b'0', b'0', 'system:smsLog:export', 3, 1, 1, NOW());
 
 -- 初始化默认部门
 INSERT INTO `sys_dept`

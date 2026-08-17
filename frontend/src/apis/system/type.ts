@@ -347,29 +347,6 @@ export interface LoginConfig {
   LOGIN_CAPTCHA_ENABLED: OptionResp
 }
 
-/** 短信日志类型 */
-export interface SmsLogResp {
-  id: string
-  configId: string
-  phone: string
-  params: string
-  status: number
-  resMsg: string
-  createUser: string
-  createTime: string
-  updateUser: string
-  updateTime: string
-  createUserString: string
-  updateUserString: string
-}
-export interface SmsLogQuery {
-  configId: string | undefined
-  phone: string | undefined
-  status: number | undefined
-  sort: Array<string>
-}
-export interface SmsLogPageQuery extends SmsLogQuery, PageQuery {}
-
 /** 绑定三方账号信息 */
 export interface BindSocialAccountRes {
   source: string

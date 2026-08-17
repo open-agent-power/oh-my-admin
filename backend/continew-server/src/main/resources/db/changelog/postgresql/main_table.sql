@@ -528,25 +528,3 @@ COMMENT ON COLUMN "sys_file"."update_time"        IS '修改时间';
 COMMENT ON COLUMN "sys_file"."deleted"            IS '是否已删除（0：否；id：是）';
 COMMENT ON TABLE  "sys_file"                      IS '文件表';
 
-CREATE TABLE IF NOT EXISTS "sys_sms_log" (
-    "id"          int8        NOT NULL,
-    "config_id"   int8        NOT NULL,
-    "phone"       varchar(25) NOT NULL,
-    "params"      text        DEFAULT NULL,
-    "status"      int2        NOT NULL DEFAULT 1,
-    "res_msg"     text        DEFAULT NULL,
-    "create_user" int8        NOT NULL,
-    "create_time" timestamp   NOT NULL,
-    PRIMARY KEY ("id")
-);
-CREATE INDEX "idx_sms_log_config_id"   ON "sys_sms_log" ("config_id");
-CREATE INDEX "idx_sms_log_create_user" ON "sys_sms_log" ("create_user");
-COMMENT ON COLUMN "sys_sms_log"."id"          IS 'ID';
-COMMENT ON COLUMN "sys_sms_log"."config_id"   IS '配置ID';
-COMMENT ON COLUMN "sys_sms_log"."phone"       IS '手机号';
-COMMENT ON COLUMN "sys_sms_log"."params"      IS '参数配置';
-COMMENT ON COLUMN "sys_sms_log"."status"      IS '发送状态（1：成功；2：失败）';
-COMMENT ON COLUMN "sys_sms_log"."res_msg"     IS '返回数据';
-COMMENT ON COLUMN "sys_sms_log"."create_user" IS '创建人';
-COMMENT ON COLUMN "sys_sms_log"."create_time" IS '创建时间';
-COMMENT ON TABLE "sys_sms_log"                IS '短信日志表';
