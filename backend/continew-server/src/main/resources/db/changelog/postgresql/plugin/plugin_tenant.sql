@@ -132,9 +132,6 @@ ALTER TABLE "sys_file" ADD COLUMN "tenant_id" int8 NOT NULL DEFAULT 0;
 COMMENT ON COLUMN "sys_file"."tenant_id" IS '租户ID';
 CREATE INDEX "idx_file_tenant_id" ON "sys_file" ("tenant_id");
 
-ALTER TABLE "sys_app" ADD COLUMN "tenant_id" int8 NOT NULL DEFAULT 0;
-COMMENT ON COLUMN "sys_app"."tenant_id" IS '租户ID';
-CREATE INDEX "idx_app_tenant_id" ON "sys_app" ("tenant_id");
 
 -- 调整唯一索引
 DROP INDEX IF EXISTS "uk_dept_name_parent_id";
@@ -152,8 +149,6 @@ CREATE UNIQUE INDEX "uk_user_phone" ON "sys_user" ("phone", "deleted", "tenant_i
 DROP INDEX IF EXISTS "uk_user_source_open_id";
 CREATE UNIQUE INDEX "uk_user_source_open_id" ON "sys_user_social" ("source", "open_id", "deleted", "tenant_id");
 
-DROP INDEX IF EXISTS "uk_app_access_key";
-CREATE UNIQUE INDEX "uk_app_access_key" ON "sys_app" ("access_key", "deleted", "tenant_id");
 
 -- 初始化默认菜单
 INSERT INTO "sys_menu" ("id", "title", "parent_id", "type", "path", "name", "component", "redirect", "icon", "is_external", "is_cache", "is_hidden", "permission", "sort", "status", "create_user", "create_time")

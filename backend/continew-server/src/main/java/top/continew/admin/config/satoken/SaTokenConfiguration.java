@@ -21,7 +21,6 @@ import cn.dev33.satoken.context.SaHolder;
 import cn.dev33.satoken.context.model.SaRequest;
 import cn.dev33.satoken.interceptor.SaInterceptor;
 import cn.dev33.satoken.router.SaRouter;
-import cn.dev33.satoken.sign.SaSignManager;
 import cn.dev33.satoken.sign.template.SaSignTemplate;
 import cn.dev33.satoken.sign.template.SaSignUtil;
 import cn.dev33.satoken.stp.StpInterface;
@@ -39,7 +38,6 @@ import org.springframework.core.annotation.AnnotationUtils;
 import top.continew.admin.common.config.crud.CrudApiPermissionPrefixCache;
 import top.continew.admin.common.context.UserContext;
 import top.continew.admin.common.context.UserContextHolder;
-import top.continew.admin.open.sign.OpenApiSignTemplate;
 import top.continew.starter.auth.satoken.autoconfigure.SaTokenExtensionProperties;
 import top.continew.starter.core.constant.StringConstants;
 import top.continew.starter.core.exception.BusinessException;
@@ -63,7 +61,6 @@ public class SaTokenConfiguration {
 
     private final SaTokenExtensionProperties properties;
     private final LoginPasswordProperties loginPasswordProperties;
-    private final OpenApiSignTemplate signTemplate;
     private final ApplicationContext applicationContext;
 
     /**
@@ -79,7 +76,6 @@ public class SaTokenConfiguration {
      */
     @Bean
     public SaInterceptor saInterceptor() {
-        SaSignManager.setSaSignTemplate(signTemplate);
         return new SaExtensionInterceptor(handle -> SaRouter.match(StringConstants.PATH_PATTERN)
             .notMatch(properties.getSecurity().getExcludes())
             .check(r -> {

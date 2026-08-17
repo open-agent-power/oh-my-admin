@@ -89,9 +89,6 @@ ALTER TABLE `sys_notice_log`
 ALTER TABLE `sys_file`
     ADD COLUMN `tenant_id` BIGINT NOT NULL DEFAULT 0 COMMENT '租户ID',
     ADD INDEX `idx_tenant_id` (`tenant_id`);
-ALTER TABLE `sys_app`
-    ADD COLUMN `tenant_id` BIGINT NOT NULL DEFAULT 0 COMMENT '租户ID',
-    ADD INDEX `idx_tenant_id` (`tenant_id`);
 
 -- 调整唯一索引
 ALTER TABLE `sys_dept`
@@ -112,9 +109,6 @@ ALTER TABLE `sys_user`
 ALTER TABLE `sys_user_social`
     DROP INDEX `uk_source_open_id`,
     ADD UNIQUE INDEX `uk_source_open_id` (`source`, `open_id`, `deleted`, `tenant_id`);
-ALTER TABLE `sys_app`
-    DROP INDEX `uk_access_key`,
-    ADD UNIQUE INDEX `uk_access_key` (`access_key`, `deleted`, `tenant_id`);
 
 -- 初始化默认菜单
 INSERT INTO `sys_menu`

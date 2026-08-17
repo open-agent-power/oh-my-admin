@@ -25,8 +25,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import top.continew.admin.common.constant.CacheConstants;
-import top.continew.admin.open.mapper.AppMapper;
-import top.continew.admin.open.model.entity.AppDO;
 import top.continew.admin.system.mapper.*;
 import top.continew.admin.system.mapper.user.UserMapper;
 import top.continew.admin.system.mapper.user.UserSocialMapper;
@@ -65,7 +63,6 @@ public class DemoEnvironmentJob {
     private final RoleMenuMapper roleMenuMapper;
     private final MenuMapper menuMapper;
     private final DeptMapper deptMapper;
-    private final AppMapper appMapper;
     private final TenantMapper tenantMapper;
     private final PackageMapper packageMapper;
     private final PackageMenuMapper packageMenuMapper;
@@ -104,8 +101,6 @@ public class DemoEnvironmentJob {
             this.log(menuCount, "菜单");
             Long deptCount = deptMapper.lambdaQuery().gt(DeptDO::getId, DEPT_FLAG).count();
             this.log(deptCount, "部门");
-            Long appCount = appMapper.lambdaQuery().gt(AppDO::getId, DELETE_FLAG).count();
-            this.log(appCount, "应用");
             Long tenantCount = tenantMapper.lambdaQuery().count();
             this.log(tenantCount, "租户");
             Long packageCount = packageMapper.lambdaQuery().count();
@@ -139,7 +134,6 @@ public class DemoEnvironmentJob {
                 .gt(MenuDO::getId, DELETE_FLAG)
                 .remove());
             this.clean(deptCount, "部门", null, () -> deptMapper.lambdaUpdate().gt(DeptDO::getId, DEPT_FLAG).remove());
-            this.clean(appCount, "应用", null, () -> appMapper.lambdaUpdate().gt(AppDO::getId, DEPT_FLAG).remove());
             this.clean(tenantCount, "租户", null, () -> tenantMapper.lambdaUpdate().remove());
             this.clean(packageCount, "套餐", null, () -> packageMapper.lambdaUpdate().remove());
             SnailJobLog.REMOTE.info("演示环境数据已清理完成。");
