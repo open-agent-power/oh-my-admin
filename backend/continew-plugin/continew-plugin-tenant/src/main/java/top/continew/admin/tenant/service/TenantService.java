@@ -16,12 +16,7 @@
 
 package top.continew.admin.tenant.service;
 
-import top.continew.admin.common.base.service.BaseService;
 import top.continew.admin.tenant.model.entity.TenantDO;
-import top.continew.admin.tenant.model.query.TenantQuery;
-import top.continew.admin.tenant.model.req.TenantReq;
-import top.continew.admin.tenant.model.resp.TenantDetailResp;
-import top.continew.admin.tenant.model.resp.TenantResp;
 import top.continew.starter.data.service.IService;
 
 import java.util.List;
@@ -33,7 +28,7 @@ import java.util.List;
  * @author Charles7c
  * @since 2024/11/26 17:20
  */
-public interface TenantService extends BaseService<TenantResp, TenantDetailResp, TenantQuery, TenantReq>, IService<TenantDO> {
+public interface TenantService extends IService<TenantDO> {
 
     /**
      * 根据域名查询

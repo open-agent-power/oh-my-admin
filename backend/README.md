@@ -135,7 +135,7 @@ public class DeptController extends BaseController<DeptService, DeptResp, DeptDe
 
 > [!TIP]
 > 更多功能和优化正在赶来💦，最新项目计划、进展请进群或查看 [吐槽广场](https://continew.top/docs/admin/issue-hub.html) 和 [更新日志](https://continew.top/docs/admin/changelog/)。
-> 功能不会用？请查看 [功能手册](https://continew.top/docs/admin/function/tenant/management.html)。
+> 功能不会用？请查看 [功能手册](https://continew.top/docs/admin/function/tenant/package.html)。
 
 - 仪表盘：提供工作台、分析页，工作台提供功能快捷导航入口、最新公告、动态；分析页提供全面数据可视化能力
 - 个人中心：支持基础信息修改、密码修改、邮箱绑定、手机号绑定（并提供行为验证码、短信限流等安全处理）、第三方账号绑定/解绑（微信登录）、头像裁剪上传
@@ -154,7 +154,6 @@ public class DeptController extends BaseController<DeptService, DeptResp, DeptDe
   - 存储配置：管理文件存储配置，支持本地存储、兼容 S3 协议对象存储
 - 在线用户：管理当前登录用户，可一键踢除下线
 - 日志管理：管理系统登录日志、操作日志，支持查看日志详情，包含请求头、响应头等报文信息
-- 租户管理：管理租户信息，包含新增、修改、删除、分配角色等功能
 - 租户套餐：管理租户套餐信息，包含新增、修改、删除、查看等功能
 - 任务管理：管理系统定时任务，包含新增、修改、删除、执行功能，支持 Cron（可配置式生成 Cron 表达式） 和固定频率
 - 任务日志：管理定时任务执行日志，包含停止、重试指定批次等功能

@@ -16,41 +16,30 @@
 
 package top.continew.admin.tenant.service.impl;
 
-import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.extra.spring.SpringUtil;
 import com.alicp.jetcache.anno.Cached;
 import lombok.RequiredArgsConstructor;
-import me.ahoo.cosid.provider.IdGeneratorProvider;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import cn.hutool.core.collection.CollUtil;
 import top.continew.admin.common.api.system.RoleApi;
 import top.continew.admin.common.api.system.RoleMenuApi;
-import top.continew.admin.common.api.tenant.TenantDataApi;
-import top.continew.admin.common.base.service.BaseServiceImpl;
 import top.continew.admin.common.config.TenantExtensionProperties;
 import top.continew.admin.common.constant.CacheConstants;
 import top.continew.admin.common.enums.DisEnableStatusEnum;
 import top.continew.admin.common.enums.RoleCodeEnum;
-import top.continew.admin.common.model.dto.TenantDTO;
 import top.continew.admin.tenant.constant.TenantCacheConstants;
-import top.continew.admin.tenant.constant.TenantConstants;
 import top.continew.admin.tenant.mapper.TenantMapper;
 import top.continew.admin.tenant.model.entity.TenantDO;
-import top.continew.admin.tenant.model.query.TenantQuery;
-import top.continew.admin.tenant.model.req.TenantReq;
-import top.continew.admin.tenant.model.resp.TenantDetailResp;
-import top.continew.admin.tenant.model.resp.TenantResp;
 import top.continew.admin.tenant.service.PackageService;
 import top.continew.admin.tenant.service.TenantService;
 import top.continew.starter.cache.redisson.util.RedisUtils;
 import top.continew.starter.core.constant.StringConstants;
 import top.continew.starter.core.util.validation.CheckUtils;
+import top.continew.starter.data.service.impl.ServiceImpl;
 import top.continew.starter.extension.tenant.util.TenantUtils;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 /**
@@ -62,59 +51,12 @@ import java.util.Set;
  */
 @Service
 @RequiredArgsConstructor
-public class TenantServiceImpl extends BaseServiceImpl<TenantMapper, TenantDO, TenantResp, TenantDetailResp, TenantQuery, TenantReq> implements TenantService {
+public class TenantServiceImpl extends ServiceImpl<TenantMapper, TenantDO> implements TenantService {
 
-    private final Map<String, TenantDataApi> tenantDataApiMap = SpringUtil.getBeansOfType(TenantDataApi.class);
     private final TenantExtensionProperties tenantExtensionProperties;
     private final PackageService packageService;
-    private final IdGeneratorProvider idGeneratorProvider;
     private final RoleMenuApi roleMenuApi;
     private final RoleApi roleApi;
-
-    @Override
-    public Long create(TenantReq req) {
-        this.checkNameRepeat(req.getName(), null);
-        this.checkDomainRepeat(req.getDomain(), null);
-        // 检查套餐
-        packageService.checkStatus(req.getPackageId());
-        // 生成租户编码
-        req.setCode(this.generateCode());
-        // 新增信息
-        Long id = super.create(req);
-        // 初始化租户数据
-        req.setId(id);
-        tenantDataApiMap.forEach((key, value) -> value.init(BeanUtil.copyProperties(req, TenantDTO.class)));
-        return id;
-    }
-
-    @Override
-    public void beforeUpdate(TenantReq req, Long id) {
-        this.checkNameRepeat(req.getName(), id);
-        this.checkDomainRepeat(req.getDomain(), id);
-        TenantDO tenant = super.getById(id);
-        // 变更套餐
-        if (!tenant.getPackageId().equals(req.getPackageId())) {
-            packageService.checkStatus(req.getPackageId());
-        }
-    }
-
-    @Override
-    public void afterUpdate(TenantReq req, TenantDO entity) {
-        RedisUtils.deleteByPattern(TenantCacheConstants.TENANT_KEY_PREFIX + StringConstants.ASTERISK);
-    }
-
-    @Override
-    public void beforeDelete(List<Long> ids) {
-        // 在租户中执行数据清除
-        for (Long id : ids) {
-            TenantUtils.execute(id, () -> tenantDataApiMap.forEach((key, value) -> value.clear()));
-        }
-    }
-
-    @Override
-    public void afterDelete(List<Long> ids) {
-        RedisUtils.deleteByPattern(TenantCacheConstants.TENANT_KEY_PREFIX + StringConstants.ASTERISK);
-    }
 
     @Override
     @Cached(name = TenantCacheConstants.TENANT_KEY_PREFIX, key = "#domain")
@@ -144,7 +86,7 @@ public class TenantServiceImpl extends BaseServiceImpl<TenantMapper, TenantDO, T
         if (tenantExtensionProperties.getDefaultTenantId().equals(id)) {
             return;
         }
-        TenantDO tenant = this.getById(id);
+        TenantDO tenant = baseMapper.selectById(id);
         CheckUtils.throwIfEqual(DisEnableStatusEnum.DISABLE, tenant.getStatus(), "租户已被禁用");
         CheckUtils.throwIf(tenant.getExpireTime() != null && tenant.getExpireTime()
             .isBefore(LocalDateTime.now()), "租户已过期");
@@ -181,45 +123,6 @@ public class TenantServiceImpl extends BaseServiceImpl<TenantMapper, TenantDO, T
     @Override
     public Long countByPackageIds(List<Long> packageIds) {
         return baseMapper.lambdaQuery().in(TenantDO::getPackageId, packageIds).count();
-    }
-
-    /**
-     * 检查名称是否重复
-     *
-     * @param name 名称
-     * @param id   ID
-     */
-    private void checkNameRepeat(String name, Long id) {
-        CheckUtils.throwIf(baseMapper.lambdaQuery()
-            .eq(TenantDO::getName, name)
-            .ne(id != null, TenantDO::getId, id)
-            .exists(), "名称为 [{}] 的租户已存在", name);
-    }
-
-    /**
-     * 检查域名是否重复
-     *
-     * @param domain 域名
-     * @param id     ID
-     */
-    private void checkDomainRepeat(String domain, Long id) {
-        CheckUtils.throwIf(baseMapper.lambdaQuery()
-            .eq(TenantDO::getDomain, domain)
-            .ne(id != null, TenantDO::getId, id)
-            .exists(), "域名为 [{}] 的租户已存在", domain);
-    }
-
-    /**
-     * 生成租户编码
-     *
-     * @return 租户编码
-     */
-    private String generateCode() {
-        String code;
-        do {
-            code = idGeneratorProvider.getRequired(TenantConstants.CODE_GENERATOR_KEY).generateAsString();
-        } while (baseMapper.lambdaQuery().eq(TenantDO::getCode, code).exists());
-        return code;
     }
 
     /**
