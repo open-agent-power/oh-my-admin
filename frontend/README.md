@@ -98,7 +98,6 @@ ContiNew Admin（Continue New Admin），页面现代美观，且专注设计与
 public class DeptController extends BaseController<DeptService, DeptResp, DeptDetailResp, DeptQuery, DeptReq> {}
 ```
 
-**5.代码生成器：** 同步提供了代码生成器，配套前后端代码生成模板。数据表设计完成后，简单配置即可生成前后端 80% 的代码，包括 CRUD API、权限控制、参数校验、接口文档等内容。若业务不复杂，甚至能覆盖 95% 的代码量。
 
 **6.提升开发体验：** 持续优化并适配各类能提升开发体验的组件。
 
@@ -152,7 +151,6 @@ public class DeptController extends BaseController<DeptService, DeptResp, DeptDe
   - 存储配置：管理文件存储配置，支持本地存储、兼容 S3 协议对象存储
 - 在线用户：管理当前登录用户，可一键踢除下线
 - 日志管理：管理系统登录日志、操作日志，支持查看日志详情，包含请求头、响应头等报文信息
-- 代码生成：提供根据数据库表自动生成相应的前后端 CRUD 代码的功能，支持同步最新表结构及代码生成预览
 
 ## 系统截图
 
@@ -202,8 +200,6 @@ public class DeptController extends BaseController<DeptService, DeptResp, DeptDe
             <td><img src=".image/screenshot/052系统管理-文件管理-查看文档.png" alt="系统管理-文件管理-查看文档" width="1920" /></td>
         </tr>
         <tr>
-            <td><img src=".image/screenshot/301系统工具-代码生成-配置.png" alt="系统工具-代码生成-配置" width="1920" /></td>
-            <td><img src=".image/screenshot/302系统工具-代码生成-预览.png" alt="系统工具-代码生成-预览" width="1920" /></td>
         </tr>
         <tr>
             <td><img src=".image/screenshot/100系统监控-在线用户.png" alt="系统监控-在线用户" width="1920" /></td>
@@ -248,7 +244,6 @@ continew-admin-ui
 ├─ src
 │  ├─ apis             # 请求接口
 │  │  ├─ auth            # 认证模块
-│  │  ├─ code            # 代码生成模块
 │  │  ├─ common          # 公共模块
 │  │  ├─ monitor         # 系统监控模块
 │  │  ├─ open            # 能力开放模块
@@ -271,8 +266,6 @@ continew-admin-ui
 │  ├─ types            # TypeScript 类型
 │  ├─ utils            # 工具库（mock 全局开启/关闭）
 │  ├─ views            # 页面
-│  │  ├─ code            # 代码生成
-│  │  │  └─ generator      # 代码生成
 │  │  ├─ dashboard       # 仪表盘
 │  │  │  ├─ analysis       # 分析页
 │  │  │  └─ workplace      # 工作台

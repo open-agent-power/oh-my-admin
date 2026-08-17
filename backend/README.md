@@ -99,7 +99,6 @@ ContiNew Admin（Continue New Admin），页面现代美观，且专注设计与
 public class DeptController extends BaseController<DeptService, DeptResp, DeptDetailResp, DeptQuery, DeptReq> {}
 ```
 
-**5.代码生成器：** 同步提供了代码生成器，配套前后端代码生成模板。数据表设计完成后，简单配置即可生成前后端 80% 的代码，包括 CRUD API、权限控制、参数校验、接口文档等内容。若业务不复杂，甚至能覆盖 95% 的代码量。
 
 **6.提升开发体验：** 持续优化并适配各类能提升开发体验的组件。
 
@@ -153,7 +152,6 @@ public class DeptController extends BaseController<DeptService, DeptResp, DeptDe
   - 存储配置：管理文件存储配置，支持本地存储、兼容 S3 协议对象存储
 - 在线用户：管理当前登录用户，可一键踢除下线
 - 日志管理：管理系统登录日志、操作日志，支持查看日志详情，包含请求头、响应头等报文信息
-- 代码生成：提供根据数据库表自动生成相应的前后端 CRUD 代码的功能，支持同步最新表结构及代码生成预览
 
 ## 系统截图
 
@@ -203,8 +201,6 @@ public class DeptController extends BaseController<DeptService, DeptResp, DeptDe
             <td><img src=".image/screenshot/052系统管理-文件管理-查看文档.png" alt="系统管理-文件管理-查看文档" width="1920" /></td>
         </tr>
         <tr>
-            <td><img src=".image/screenshot/301系统工具-代码生成-配置.png" alt="系统工具-代码生成-配置" width="1920" /></td>
-            <td><img src=".image/screenshot/302系统工具-代码生成-预览.png" alt="系统工具-代码生成-预览" width="1920" /></td>
         </tr>
         <tr>
             <td><img src=".image/screenshot/100系统监控-在线用户.png" alt="系统监控-在线用户" width="1920" /></td>
@@ -380,7 +376,6 @@ continew-admin
 │  │  ├─ src
 │  │  │  ├─ main/java/top/continew/admin/schedule
 │  │  │  │  ├─ controller（任务调度相关 API）
-│  │  │  │  ├─ service（代码生成器相关业务接口及实现类）
 │  │  │  │  ├─ api（任务调度中心相关 Feign API）
 │  │  │  │  ├─ model（任务调度相关模型）
 │  │  │  │  │  ├─ query（任务调度相关查询条件）
@@ -393,22 +388,6 @@ continew-admin
 │  │  │  │  └─ config（任务调度相关配置）
 │  │  │  └─ test（测试相关代码目录）
 │  │  └─ pom.xml
-│  ├─ continew-plugin-generator（代码生成器插件模块）
-│  │  ├─ src
-│  │  │  ├─ main
-│  │  │  │  ├─ java/top/continew/admin/generator
-│  │  │  │  │  ├─ controller（代码生成器相关 API）
-│  │  │  │  │  ├─ service（代码生成器相关业务接口及实现类）
-│  │  │  │  │  ├─ mapper（代码生成器相关 Mapper）
-│  │  │  │  │  ├─ model（代码生成器相关模型）
-│  │  │  │  │  │  ├─ entity（代码生成器相关实体）
-│  │  │  │  │  │  ├─ query（代码生成器相关查询条件）
-│  │  │  │  │  │  ├─ req（代码生成器相关请求参数（Request））
-│  │  │  │  │  │  └─ resp（代码生成器相关响应参数（Response））
-│  │  │  │  │  ├─ enums（代码生成器相关枚举）
-│  │  │  │  │  └─ config（代码生成器相关配置）
-│  │  │  │  └─ resources
-│  │  │  │     └─ templates（代码生成相关模板目录）
 │  │  │  │       ├─ backend（后端模板目录）
 │  │  │  │       └─ frontend（前端模板目录）
 │  │  │  └─ test（测试相关代码目录）
