@@ -96,7 +96,7 @@ public class OnlineUserServiceImpl implements OnlineUserService {
                 }
             }
             List<LocalDateTime> loginTimeList = query.getLoginTime();
-            entry.getValue().parallelStream().forEach(token -> {
+            entry.getValue().stream().forEach(token -> {
                 UserExtraContext extraContext = UserContextHolder.getExtraContext(token);
                 if (!this.isMatchLoginTime(loginTimeList, extraContext.getLoginTime())) {
                     return;
