@@ -7,3 +7,10 @@ backend/*-backup-*.sql
 
 # 本地工作记忆（禁止提交/推送）
 .workbuddy/
+
+# 项目运行日志（禁止提交）
+*.log
+*.out.log
+*.err.log
+backend/logs/
+frontend/*.out.log
