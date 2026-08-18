@@ -1,3 +1,6 @@
 docs/ACCEPTANCE_CHECKLIST.md
 docs/FEATURE_DELETE_LIST.md
 docs/TECHNICAL_PLAN.md
+
+# 数据库备份（含敏感数据，不入库）
+backend/*-backup-*.sql

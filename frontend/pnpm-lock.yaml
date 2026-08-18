@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@amap/amap-jsapi-loader':
-        specifier: ^1.0.1
-        version: 1.0.1
       '@arco-design/color':
         specifier: ^0.4.0
         version: 0.4.0
@@ -38,9 +35,6 @@ importers:
       '@vue-office/pdf':
         specifier: 1.6.4
         version: 1.6.4(vue-demi@0.14.10(vue@3.5.12(typescript@5.0.4)))(vue@3.5.12(typescript@5.0.4))
-      '@vueuse/components':
-        specifier: ^10.5.0
-        version: 10.9.0(vue@3.5.12(typescript@5.0.4))
       '@vueuse/core':
         specifier: ^10.5.0
         version: 10.9.0(vue@3.5.12(typescript@5.0.4))
@@ -221,9 +215,6 @@ importers:
         version: 2.0.19(typescript@5.0.4)
 
 packages:
-
-  '@amap/amap-jsapi-loader@1.0.1':
-    resolution: {integrity: sha512-nPyLKt7Ow/ThHLkSvn2etQlUzqxmTVgK7bIgwdBRTg2HK5668oN7xVxkaiRe3YZEzGzfV2XgH5Jmu2T73ljejw==}
 
   '@ampproject/remapping@2.3.0':
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
@@ -1409,9 +1400,6 @@ packages:
     peerDependenciesMeta:
       '@types/node':
         optional: true
-
-  '@vueuse/components@10.9.0':
-    resolution: {integrity: sha512-BHQpA0yIi3y7zKa1gYD0FUzLLkcRTqVhP8smnvsCK6GFpd94Nziq1XVPD7YpFeho0k5BzbBiNZF7V/DpkJ967A==}
 
   '@vueuse/core@10.9.0':
     resolution: {integrity: sha512-/1vjTol8SXnx6xewDEKfS0Ra//ncg4Hb0DaZiwKf7drgfMsKFExQ+FnnENcN6efPen+1kIzhLQoGSy0eDUVOMg==}
@@ -4778,8 +4766,6 @@ packages:
 
 snapshots:
 
-  '@amap/amap-jsapi-loader@1.0.1': {}
-
   '@ampproject/remapping@2.3.0':
     dependencies:
       '@jridgewell/gen-mapping': 0.3.5
@@ -6068,15 +6054,6 @@ snapshots:
   '@vue/tsconfig@0.1.3(@types/node@20.12.12)':
     optionalDependencies:
       '@types/node': 20.12.12
-
-  '@vueuse/components@10.9.0(vue@3.5.12(typescript@5.0.4))':
-    dependencies:
-      '@vueuse/core': 10.9.0(vue@3.5.12(typescript@5.0.4))
-      '@vueuse/shared': 10.9.0(vue@3.5.12(typescript@5.0.4))
-      vue-demi: 0.14.10(vue@3.5.12(typescript@5.0.4))
-    transitivePeerDependencies:
-      - '@vue/composition-api'
-      - vue
 
   '@vueuse/core@10.9.0(vue@3.5.12(typescript@5.0.4))':
     dependencies:

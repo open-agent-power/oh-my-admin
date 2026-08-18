@@ -32,9 +32,6 @@ export function getFileStatistics() {
 }
 
 /** @desc 根据sha256检测文件是否已经在服务器存在 */
-export function checkFile(sha256: string) {
-  return http.get<T.FileItem>(`${BASE_URL}/check`, { fileHash: sha256 })
-}
 
 /** @desc 创建文件夹 */
 export function createDir(parentPath: string, name: string) {

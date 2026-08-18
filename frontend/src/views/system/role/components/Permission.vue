@@ -58,7 +58,7 @@
 import { nextTick, ref, watch } from 'vue'
 import { Message, type TableInstance, type TreeNodeData } from '@arco-design/web-vue'
 import { isMobile } from '@/utils'
-import type GiTable from '@/components/GiTable/index.vue'
+import type GiTable from '@/components/GiTable'
 import { useTable } from '@/hooks'
 import { type RolePermissionResp, getRole, listRolePermissionTree, updateRolePermission } from '@/apis/system/role'
 import has from '@/utils/has'

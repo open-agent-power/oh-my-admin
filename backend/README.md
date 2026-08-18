@@ -46,7 +46,7 @@
 
 ContiNew Admin（Continue New Admin），页面现代美观，且专注设计与代码细节的 **高质量多租户中后台** 管理系统框架。开箱即用，持续迭代优化，持续提供舒适的开发体验。
 
-当前采用的技术栈：Spring Boot3（Java17）、Vue3 & Arco Design & TS & Vite、Sa-Token、MyBatis Plus、Redisson、FastExcel、CosId、JetCache、JustAuth、Crane4j、Spring Doc、Hutool 等。
+当前采用的技术栈：Spring Boot3（Java17）、Vue3 & Arco Design & TS & Vite、Sa-Token、MyBatis Plus、Redisson、FastExcel、CosId、JetCache、Crane4j、Spring Doc、Hutool 等。
 
 我们始终坚信好的产品必然是反复打磨出来的，而在工作中我们受限于客户需求、开发周期等因素，无法深度打磨、重构我们的代码，这也是架构腐烂的根源。所以，我们希望能在业余时间，通过开源社区的力量来打磨出一个好的产品，一个好的实践，一个好的生态。
 
@@ -117,7 +117,7 @@ public class DeptController extends BaseController<DeptService, DeptResp, DeptDe
 
 我们还进行了全局 Lombok 配置，继承场景默认自动应用 `@EqualsAndHashCode(callSuper = true)` 和 `@ToString(callSuper = true)`，无需手动添加。同时主动禁用了部分 Lombok 注解（如 `@Val`、`@Log4j` 等），避免“又菜又爱玩”的 partner 滥用。
 
-**9.全能业务脚手架：** 支持 **SaaS 租户架构**，基于 RBAC 的权限控制与通用数据权限管理。精心设计的 UI 界面与色彩主题，兼具美观与实用性。内置丰富的通用业务解决方案：第三方登录、邮箱/短信服务（含生产级漏洞处理方案）、个人中心、用户管理、角色管理、组织管理、系统配置、系统日志、通知公告等，逻辑闭环，开箱即用。
+**9.全能业务脚手架：** 支持 **SaaS 租户架构**，基于 RBAC 的权限控制与通用数据权限管理。精心设计的 UI 界面与色彩主题，兼具美观与实用性。内置丰富的通用业务解决方案：邮箱/短信服务（含生产级漏洞处理方案）、个人中心、用户管理、角色管理、组织管理、系统配置、系统日志、通知公告等，逻辑闭环，开箱即用。
 
 > 优秀的中后台框架不仅提供组件集成与配置，封装好用的工具，更应提供通用基础业务设计及解决方案，为初创团队减负。
 
@@ -136,7 +136,7 @@ public class DeptController extends BaseController<DeptService, DeptResp, DeptDe
 > 更多功能和优化正在赶来💦，最新项目计划、进展请进群或查看 [吐槽广场](https://continew.top/docs/admin/issue-hub.html) 和 [更新日志](https://continew.top/docs/admin/changelog/)。
 
 - 仪表盘：提供工作台、分析页，工作台提供功能快捷导航入口、最新公告、动态；分析页提供全面数据可视化能力
-- 个人中心：支持基础信息修改、密码修改、邮箱绑定、手机号绑定（并提供行为验证码、短信限流等安全处理）、第三方账号绑定/解绑（微信登录）、头像裁剪上传
+- 个人中心：支持基础信息修改、密码修改、邮箱绑定、手机号绑定（并提供行为验证码、短信限流等安全处理）、头像裁剪上传
 - 用户管理：管理系统用户，包含新增、修改、删除、导入、导出、重置密码、分配角色等功能
 - 角色管理：管理系统用户的功能权限及数据权限，包含新增、修改、删除、分配角色等功能
 - 菜单管理：管理系统菜单及按钮权限，支持多级菜单，动态路由，包含新增、修改、删除等功能
@@ -236,10 +236,7 @@ public class DeptController extends BaseController<DeptService, DeptResp, DeptDe
 | [JetCache](https://github.com/alibaba/jetcache/blob/master/docs/CN/Readme.md)                                                     | 2.7.8        | 一个基于 Java 的缓存系统封装，提供统一的 API 和注解来简化缓存的使用。提供了比 SpringCache 更加强大的注解，可以原生的支持 TTL、两级缓存、分布式自动刷新，还提供了 Cache 接口用于手工缓存操作。 |
 | <a href="https://github.com/redisson/redisson/wiki/Redisson%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D" target="_blank">Redisson</a>     | 3.49.0       | 不仅仅是一个 Redis Java 客户端，Redisson 充分的利用了 Redis 键值数据库提供的一系列优势，为使用者提供了一系列具有分布式特性的常用工具：分布式锁、限流器等。 |
 | <a href="https://redis.io/" target="_blank">Redis</a>                                                                             | 7.2.8        | 高性能的 key-value 数据库。                                  |
-| [Snail Job](https://snailjob.opensnail.com/)                                                                                      | 1.5.0        | 灵活，可靠和快速的分布式任务重试和分布式任务调度平台。       |
 | [X File Storage](https://x-file-storage.xuyanwu.cn/#/)                                                                            | 2.2.1        | 一行代码将文件存储到本地、FTP、SFTP、WebDAV、阿里云 OSS、华为云 OBS...等其它兼容 S3 协议的存储平台。 |
-| <a href="https://sms4j.com/" target="_blank">SMS4J</a>                                                                            | 3.3.4        | 短信聚合框架，轻松集成多家短信服务，解决接入多个短信 SDK 的繁琐流程。 |
-| <a href="https://justauth.cn/" target="_blank">Just Auth</a>                                                                      | 1.16.7       | 开箱即用的整合第三方登录的开源组件，脱离繁琐的第三方登录 SDK，让登录变得 So easy！ |
 | <a href="https://github.com/fast-excel/fastexcel" target="_blank">Fast Excel</a>                                                  | 1.2.0        | （由原 EasyExcel 作者创建的新项目）一个基于 Java 的、快速、简洁、解决大文件内存溢出的 Excel 处理工具。 |
 | [AJ-Captcha](https://ajcaptcha.beliefteam.cn/captcha-doc/)                                                                        | 1.3.0        | Java 行为验证码，包含滑动拼图、文字点选两种方式，UI支持弹出和嵌入两种方式。 |
 | Easy Captcha                                                                                                                      | 1.6.2        | Java 图形验证码，支持 gif、中文、算术等类型，可用于 Java Web、JavaSE 等项目。 |
@@ -335,63 +332,6 @@ continew-admin
 │  │  │  └─ resources
 │  │  │     └─ mapper（系统管理相关 Mapper XML 文件目录）
 │  │  └─ test（测试相关代码目录）
-│  └─ pom.xml
-├─ continew-plugin（插件模块，存放能力开放、租户等扩展模块，后续会进行插件化改造）
-│  ├─ continew-plugin-open（能力开放插件模块）
-│  │  ├─ src
-│  │  │  ├─ main/java/top/continew/admin/open
-│  │  │  │  ├─ controller（能力开放相关 API）
-│  │  │  │  ├─ service（能力开放相关业务接口及实现类）
-│  │  │  │  ├─ mapper（能力开放相关 Mapper）
-│  │  │  │  ├─ model（能力开放相关模型）
-│  │  │  │  │  ├─ entity（能力开放相关实体）
-│  │  │  │  │  ├─ query（能力开放相关查询条件）
-│  │  │  │  │  ├─ req（能力开放相关请求参数（Request））
-│  │  │  │  │  └─ resp（能力开放相关响应参数（Response））
-│  │  │  │  ├─ util（能力开放相关工具类）
-│  │  │  │  ├─ handler（能力开放相关处理器）
-│  │  │  │  ├─ sign（能力开放相关 API 参数签名算法）
-│  │  │  │  └─ config（能力开放相关配置）
-│  │  │  └─ test（测试相关代码目录）
-│  │  └─ pom.xml
-│  ├─ continew-plugin-tenant（租户插件模块）
-│  │  ├─ src
-│  │  │  ├─ main/java/top/continew/admin/tenant
-│  │  │  │  ├─ api（租户相关公共业务 API 实现）
-│  │  │  │  ├─ controller（租户相关 API）
-│  │  │  │  ├─ service（租户相关业务接口及实现类）
-│  │  │  │  ├─ mapper（租户相关 Mapper）
-│  │  │  │  ├─ model（租户相关模型）
-│  │  │  │  │  ├─ entity（租户相关实体）
-│  │  │  │  │  ├─ query（租户相关查询条件）
-│  │  │  │  │  ├─ req（租户相关请求参数（Request））
-│  │  │  │  │  └─ resp（租户相关响应参数（Response））
-│  │  │  │  ├─ enums（租户相关枚举）
-│  │  │  │  ├─ constant（租户相关常量类）
-│  │  │  │  ├─ util（租户相关工具类）
-│  │  │  │  └─ config（租户相关配置）
-│  │  │  └─ test（测试相关代码目录）
-│  │  └─ pom.xml
-│  ├─ continew-plugin-schedule（任务调度插件模块）
-│  │  ├─ src
-│  │  │  ├─ main/java/top/continew/admin/schedule
-│  │  │  │  ├─ controller（任务调度相关 API）
-│  │  │  │  ├─ api（任务调度中心相关 Feign API）
-│  │  │  │  ├─ model（任务调度相关模型）
-│  │  │  │  │  ├─ query（任务调度相关查询条件）
-│  │  │  │  │  ├─ req（任务调度相关请求参数（Request））
-│  │  │  │  │  └─ resp（任务调度相关响应参数（Response））
-│  │  │  │  ├─ enums（任务调度相关枚举）
-│  │  │  │  ├─ constant（任务调度相关常量类）
-│  │  │  │  ├─ exception（任务调度相关异常）
-│  │  │  │  ├─ annotation（任务调度相关注解）
-│  │  │  │  └─ config（任务调度相关配置）
-│  │  │  └─ test（测试相关代码目录）
-│  │  └─ pom.xml
-│  │  │  │       ├─ backend（后端模板目录）
-│  │  │  │       └─ frontend（前端模板目录）
-│  │  │  └─ test（测试相关代码目录）
-│  │  └─ pom.xml
 │  └─ pom.xml
 ├─ continew-common（公共模块，存放公共工具类，公共配置等）
 │  ├─ src

@@ -170,6 +170,7 @@ continew-starter.log:
   includes:
     - DESCRIPTION
     - MODULE
+    - REQUEST_HEADERS
     - REQUEST_BODY
     - IP_ADDRESS
     - BROWSER
@@ -255,7 +256,7 @@ sa-token:
   # 是否输出操作日志
   is-log: false
   # JWT 秘钥
-  jwt-secret-key: asdasdasifhueuiwyurfewbfjsdafjk
+  jwt-secret-key: ${JWT_SECRET_KEY:asdasdasifhueuiwyurfewbfjsdafjk}
   ## 扩展配置
   extension:
     enabled: true

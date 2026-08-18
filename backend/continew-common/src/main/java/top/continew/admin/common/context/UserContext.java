@@ -124,7 +124,7 @@ public class UserContext implements Serializable {
         if (this.passwordExpirationDays == null || this.passwordExpirationDays <= GlobalConstants.Boolean.NO) {
             return false;
         }
-        // 初始密码（第三方登录用户）暂不提示修改
+        // 初始密码（首次登录用户）暂不提示修改
         if (this.pwdResetTime == null) {
             return false;
         }

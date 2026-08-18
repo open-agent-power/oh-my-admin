@@ -16,6 +16,7 @@
 
 package top.continew.admin.system.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -46,6 +47,7 @@ public class MultipartUploadController {
      * @param multiPartUploadInitReq 分片上传信息
      * @return 初始化响应
      */
+    @SaCheckPermission("system:file:upload")
     @Operation(summary = "初始化分片上传", description = "初始化分片上传，返回uploadId等信息")
     @PostMapping("/init")
     public MultipartUploadInitResp initMultipartUpload(@RequestBody @Valid MultipartUploadInitReq multiPartUploadInitReq) {
@@ -61,6 +63,7 @@ public class MultipartUploadController {
      * @param path       文件路径
      * @return 上传结果
      */
+    @SaCheckPermission("system:file:upload")
     @Operation(summary = "上传分片", description = "上传单个分片")
     @PostMapping("/part")
     public MultipartUploadResp uploadPart(@RequestPart("file") MultipartFile file,
@@ -75,6 +78,7 @@ public class MultipartUploadController {
      *
      * @param uploadId 上传ID
      */
+    @SaCheckPermission("system:file:upload")
     @Operation(summary = "完成分片上传", description = "合并所有分片，完成上传")
     @GetMapping("/complete/{uploadId}")
     public FileDO completeMultipartUpload(@PathVariable String uploadId) {
@@ -86,6 +90,7 @@ public class MultipartUploadController {
      *
      * @param uploadId 上传ID
      */
+    @SaCheckPermission("system:file:upload")
     @Operation(summary = "取消分片上传", description = "删除缓存信息,分片数据")
     @GetMapping("/cancel/{uploadId}")
     public void cancelMultipartUpload(@PathVariable String uploadId) {

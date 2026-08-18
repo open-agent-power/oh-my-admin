@@ -1,7 +1,6 @@
 import { browse, mapTree } from 'xe-utils'
 import { camelCase, upperFirst } from 'lodash-es'
 import { Message } from '@arco-design/web-vue'
-import CronParser from 'cron-parser'
 import { isExternal } from '@/utils/validate'
 
 export function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
@@ -333,26 +332,4 @@ const expressionNoYear = (cron: string) => {
   return cron
 }
 
-/**
- * 解析cron表达式预计未来运行时间
- * @param cron cron表达式
- */
-export function parseCron(cron: string) {
-  try {
-    const parse = expressionNoYear(cron)
-    const iter = CronParser.parseExpression(parse, {
-      currentDate: dateFormat(new Date()),
-    })
-    const result: string[] = []
-    for (let i = 1; i <= 5; i++) {
-      const nextDate = iter.next()
-      if (nextDate) {
-        result.push(dateFormat(new Date(nextDate as any)))
-      }
-    }
-
-    return result.length > 0 ? result.join('\n') : '无执行时间'
-  } catch (e) {
-    return '表达式错误'
-  }
-}
+/** parseCron removed (dead code, cron-parser dependency removed) */

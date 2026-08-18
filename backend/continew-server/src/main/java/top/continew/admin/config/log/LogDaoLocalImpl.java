@@ -55,6 +55,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * 日志持久层接口本地实现类
@@ -63,6 +64,12 @@ import java.util.Set;
  * @since 2023/12/16 23:55
  */
 public class LogDaoLocalImpl implements LogDao {
+
+    /**
+     * 敏感请求头（不写入日志，避免 Token、Cookie 等信息泄露；统一小写比较）
+     */
+    private static final Set<String> SENSITIVE_HEADERS = Set.of(HttpHeaders.AUTHORIZATION
+        .toLowerCase(), "cookie", "satoken", "x-access-token", "set-cookie");
 
     private final UserService userService;
     private final LogMapper logMapper;
@@ -96,8 +103,10 @@ public class LogDaoLocalImpl implements LogDao {
         // 保存记录
         if (TenantContextHolder.isTenantEnabled()) {
             // 异步无法获取租户 ID
-            String tenantId = logRequest.getHeaders()
-                .get(SpringUtil.getBean(TenantProperties.class).getTenantIdHeader());
+            Map<String, String> headers = logRequest.getHeaders();
+            String tenantId = MapUtil.isNotEmpty(headers)
+                ? headers.get(SpringUtil.getBean(TenantProperties.class).getTenantIdHeader())
+                : null;
             if (StrUtil.isNotBlank(tenantId)) {
                 TenantUtils.execute(Long.parseLong(tenantId), () -> logMapper.insert(logDO));
                 return;
@@ -115,7 +124,7 @@ public class LogDaoLocalImpl implements LogDao {
     private void setRequest(LogDO logDO, LogRequest logRequest) {
         logDO.setRequestMethod(logRequest.getMethod());
         logDO.setRequestUrl(logRequest.getUrl().toString());
-        logDO.setRequestHeaders(JSONUtil.toJsonStr(logRequest.getHeaders()));
+        logDO.setRequestHeaders(JSONUtil.toJsonStr(filterSensitiveHeaders(logRequest.getHeaders())));
         logDO.setRequestBody(logRequest.getBody());
         logDO.setIp(logRequest.getIp());
         logDO.setAddress(logRequest.getAddress());
@@ -132,7 +141,9 @@ public class LogDaoLocalImpl implements LogDao {
     private void setResponse(LogDO logDO, LogResponse logResponse) {
         Map<String, String> responseHeaders = logResponse.getHeaders();
         logDO.setResponseHeaders(JSONUtil.toJsonStr(responseHeaders));
-        logDO.setTraceId(responseHeaders.get(traceProperties.getTraceIdName()));
+        logDO.setTraceId(MapUtil.isNotEmpty(responseHeaders)
+            ? responseHeaders.get(traceProperties.getTraceIdName())
+            : null);
         String responseBody = logResponse.getBody();
         logDO.setResponseBody(responseBody);
         // 状态
@@ -187,14 +198,30 @@ public class LogDaoLocalImpl implements LogDao {
         // 解析 Token 信息
         Map<String, String> requestHeaders = logRequest.getHeaders();
         String headerName = HttpHeaders.AUTHORIZATION;
-        boolean isContainsAuthHeader = CollUtil.containsAny(requestHeaders.keySet(), Set.of(headerName, headerName
-            .toLowerCase()));
-        if (MapUtil.isNotEmpty(requestHeaders) && isContainsAuthHeader) {
+        boolean isContainsAuthHeader = MapUtil.isNotEmpty(requestHeaders) && CollUtil.containsAny(requestHeaders
+            .keySet(), Set.of(headerName, headerName.toLowerCase()));
+        if (isContainsAuthHeader) {
             String authorization = requestHeaders.getOrDefault(headerName, requestHeaders.get(headerName
                 .toLowerCase()));
             String token = authorization.replace(SaManager.getConfig()
                 .getTokenPrefix() + StringConstants.SPACE, StringConstants.EMPTY);
             logDO.setCreateUser(Convert.toLong(StpUtil.getLoginIdByToken(token)));
         }
+    }
+
+    /**
+     * 过滤敏感请求头（避免 Token、Cookie 等信息写入日志）
+     *
+     * @param headers 请求头
+     * @return 过滤后的请求头
+     */
+    private Map<String, String> filterSensitiveHeaders(Map<String, String> headers) {
+        if (MapUtil.isEmpty(headers)) {
+            return headers;
+        }
+        return headers.entrySet()
+            .stream()
+            .filter(entry -> !SENSITIVE_HEADERS.contains(entry.getKey().toLowerCase()))
+            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (v1, v2) -> v1));
     }
 }
