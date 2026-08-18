@@ -96,22 +96,12 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!-- API 接口参数签名 -->
-        <dependency>
-            <groupId>cn.dev33</groupId>
-            <artifactId>sa-token-sign</artifactId>
-        </dependency>
         <!-- NextDoc4j - SaToken 权限展示插件 -->
         <dependency>
             <groupId>top.nextdoc4j</groupId>
             <artifactId>nextdoc4j-plugin-security-satoken</artifactId>
         </dependency>
 
-        <!-- ContiNew Starter 认证模块 - JustAuth -->
-        <dependency>
-            <groupId>top.continew.starter</groupId>
-            <artifactId>continew-starter-auth-justauth</artifactId>
-        </dependency>
 
         <!-- ContiNew Starter 加密模块 - 字段加密 -->
         <dependency>

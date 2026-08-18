@@ -11,7 +11,6 @@
     >
       <Logo :collapsed="appStore.menuCollapse" />
       <Menu :menus="twoLevelMenus" :menu-style="{ flex: 1 }" />
-      <WwAds class="ads" />
     </section>
 
     <!-- 右侧内容区域 -->
@@ -50,8 +49,6 @@ import Tabs from './components/Tabs/index.vue'
 import { useAppStore } from '@/stores'
 import { useLevelMenu } from '@/layout/hooks/useLevelMenu'
 import { useDevice } from '@/hooks'
-
-import WwAds from '@/layout/components/WwAds.vue'
 
 /** 组件名称 */
 defineOptions({ name: 'LayoutMix' })

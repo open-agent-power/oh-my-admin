@@ -347,12 +347,6 @@ export interface LoginConfig {
   LOGIN_CAPTCHA_ENABLED: OptionResp
 }
 
-/** 绑定三方账号信息 */
-export interface BindSocialAccountRes {
-  source: string
-  description: string
-}
-
 /** 分片上传 - 初始化参数 */
 export interface MultiPartUploadInitReq {
   fileName: string

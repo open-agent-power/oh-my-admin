@@ -17,12 +17,8 @@
 package top.continew.admin.config.satoken;
 
 import cn.dev33.satoken.annotation.SaIgnore;
-import cn.dev33.satoken.context.SaHolder;
-import cn.dev33.satoken.context.model.SaRequest;
 import cn.dev33.satoken.interceptor.SaInterceptor;
 import cn.dev33.satoken.router.SaRouter;
-import cn.dev33.satoken.sign.template.SaSignTemplate;
-import cn.dev33.satoken.sign.template.SaSignUtil;
 import cn.dev33.satoken.stp.StpInterface;
 import cn.dev33.satoken.stp.StpUtil;
 import lombok.RequiredArgsConstructor;
@@ -41,7 +37,6 @@ import top.continew.admin.common.context.UserContext;
 import top.continew.admin.common.context.UserContextHolder;
 import top.continew.starter.auth.satoken.autoconfigure.SaTokenExtensionProperties;
 import top.continew.starter.core.constant.StringConstants;
-import top.continew.starter.core.exception.BusinessException;
 import top.continew.starter.core.util.validation.CheckUtils;
 import top.continew.starter.extension.crud.annotation.CrudRequestMapping;
 
@@ -81,18 +76,7 @@ public class SaTokenConfiguration {
         return new SaExtensionInterceptor(handle -> SaRouter.match(StringConstants.PATH_PATTERN)
             .notMatch(properties.getSecurity().getExcludes())
             .check(r -> {
-                // 如果包含 sign，进行 API 接口参数签名验证
-                SaRequest saRequest = SaHolder.getRequest();
-                Collection<String> paramNames = saRequest.getParamNames();
-                if (paramNames.stream().anyMatch(SaSignTemplate.sign::equals)) {
-                    try {
-                        SaSignUtil.checkRequest(saRequest);
-                    } catch (Exception e) {
-                        throw new BusinessException(e.getMessage());
-                    }
-                    return;
-                }
-                // 不包含 sign 参数，进行普通登录验证
+                // 登录验证
                 StpUtil.checkLogin();
                 if (SaRouter.isMatchCurrURI(loginPasswordProperties.getExcludes())) {
                     return;

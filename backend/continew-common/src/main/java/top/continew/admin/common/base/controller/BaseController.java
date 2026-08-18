@@ -17,9 +17,6 @@
 package top.continew.admin.common.base.controller;
 
 import cn.dev33.satoken.annotation.SaIgnore;
-import cn.dev33.satoken.context.SaHolder;
-import cn.dev33.satoken.context.model.SaRequest;
-import cn.dev33.satoken.sign.template.SaSignTemplate;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.annotation.AnnotationUtil;
 import cn.hutool.extra.spring.SpringUtil;
@@ -33,7 +30,6 @@ import top.continew.starter.extension.crud.controller.AbstractCrudController;
 import top.continew.starter.extension.crud.enums.Api;
 
 import java.lang.reflect.Method;
-import java.util.Collection;
 
 /**
  * 控制器基类
@@ -54,12 +50,6 @@ public class BaseController<S extends BaseService<L, D, Q, C>, L, D, Q, C> exten
 
     @Override
     public void preHandle(CrudApi crudApi, Object[] args, Method targetMethod, Class<?> targetClass) throws Exception {
-        // 忽略带 sign 请求权限校验
-        SaRequest saRequest = SaHolder.getRequest();
-        Collection<String> paramNames = saRequest.getParamNames();
-        if (paramNames.stream().anyMatch(SaSignTemplate.sign::equals)) {
-            return;
-        }
         // 忽略接口类或接口方法上带 @SaIgnore 注解的权限校验
         if (AnnotationUtil.hasAnnotation(targetMethod, SaIgnore.class) || AnnotationUtil
             .hasAnnotation(targetClass, SaIgnore.class)) {

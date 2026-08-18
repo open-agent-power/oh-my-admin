@@ -170,13 +170,11 @@ continew-starter.log:
   includes:
     - DESCRIPTION
     - MODULE
-    - REQUEST_HEADERS
     - REQUEST_BODY
     - IP_ADDRESS
     - BROWSER
     - OS
     - RESPONSE_HEADERS
-    - RESPONSE_BODY
 ## 项目日志配置
 logging:
   config: classpath:logback-spring.xml
@@ -212,9 +210,6 @@ continew-starter.tenant:
   default-tenant-id: 0
   # 忽略表（忽略拼接租户条件）
   ignore-tables:
-    - tenant # 租户表
-    - tenant_package # 租户套餐表
-    - tenant_package_menu # 租户套餐与菜单关联表
     - sys_menu # 菜单表
     - sys_dict # 字典表
     - sys_dict_item # 字典项表
@@ -226,9 +221,6 @@ continew-starter.tenant:
     - 1130 # 字典管理
     - 1140 # 字典项管理
     - 1150 # 系统配置
-    - 7000 # 能力开放
-    - 8000 # 任务调度
-    - 9000 # 开发工具
 
 --- ### 限流器配置
 continew-starter.rate-limiter:

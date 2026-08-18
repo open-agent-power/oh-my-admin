@@ -27,18 +27,3 @@ export function updateUserPhone(data: { phone: string, captcha: string, oldPassw
 export function updateUserEmail(data: { email: string, captcha: string, oldPassword: string }) {
   return http.patch(`${BASE_URL}/email`, data)
 }
-
-/** @desc 获取绑定的三方账号 */
-export function listUserSocial() {
-  return http.get<T.BindSocialAccountRes[]>(`${BASE_URL}/social`)
-}
-
-/** @desc 绑定三方账号 */
-export function bindSocialAccount(source: string, data: any) {
-  return http.post(`${BASE_URL}/social/${source}`, data)
-}
-
-/** @desc 解绑三方账号 */
-export function unbindSocialAccount(source: string) {
-  return http.del(`${BASE_URL}/social/${source}`)
-}
