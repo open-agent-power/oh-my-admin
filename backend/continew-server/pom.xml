@@ -22,24 +22,6 @@
             <artifactId>continew-system</artifactId>
         </dependency>
 
-        <!-- 能力开放插件 -->
-        <dependency>
-            <groupId>top.continew.admin</groupId>
-            <artifactId>continew-plugin-open</artifactId>
-        </dependency>
-
-        <!-- 租户插件 -->
-        <dependency>
-            <groupId>top.continew.admin</groupId>
-            <artifactId>continew-plugin-tenant</artifactId>
-        </dependency>
-
-        <!-- 任务调度插件 -->
-        <dependency>
-            <groupId>top.continew.admin</groupId>
-            <artifactId>continew-plugin-schedule</artifactId>
-        </dependency>
-
         <!-- ContiNew Starter 链路追踪模块 -->
         <dependency>
             <groupId>top.continew.starter</groupId>

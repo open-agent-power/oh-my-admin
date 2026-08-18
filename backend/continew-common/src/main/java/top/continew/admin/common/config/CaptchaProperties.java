@@ -16,7 +16,6 @@
 
 package top.continew.admin.common.config;
 
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
@@ -27,7 +26,6 @@ import org.springframework.stereotype.Component;
  * @author Charles7c
  * @since 2022/12/11 13:35
  */
-@Data
 @Component
 @ConfigurationProperties(prefix = "captcha")
 public class CaptchaProperties {
@@ -48,10 +46,33 @@ public class CaptchaProperties {
      */
     private CaptchaSms sms;
 
+    public long getExpirationInMinutes() {
+        return this.expirationInMinutes;
+    }
+
+    public void setExpirationInMinutes(long expirationInMinutes) {
+        this.expirationInMinutes = expirationInMinutes;
+    }
+
+    public CaptchaMail getMail() {
+        return this.mail;
+    }
+
+    public void setMail(CaptchaMail mail) {
+        this.mail = mail;
+    }
+
+    public CaptchaSms getSms() {
+        return this.sms;
+    }
+
+    public void setSms(CaptchaSms sms) {
+        this.sms = sms;
+    }
+
     /**
      * 邮箱验证码配置
      */
-    @Data
     public static class CaptchaMail {
         /**
          * 内容长度
@@ -67,12 +88,35 @@ public class CaptchaProperties {
          * 模板路径
          */
         private String templatePath;
+
+        public int getLength() {
+            return this.length;
+        }
+
+        public void setLength(int length) {
+            this.length = length;
+        }
+
+        public long getExpirationInMinutes() {
+            return this.expirationInMinutes;
+        }
+
+        public void setExpirationInMinutes(long expirationInMinutes) {
+            this.expirationInMinutes = expirationInMinutes;
+        }
+
+        public String getTemplatePath() {
+            return this.templatePath;
+        }
+
+        public void setTemplatePath(String templatePath) {
+            this.templatePath = templatePath;
+        }
     }
 
     /**
      * 短信验证码配置
      */
-    @Data
     public static class CaptchaSms {
         /**
          * 内容长度
@@ -93,5 +137,37 @@ public class CaptchaProperties {
          * 失效时间字段模板键名
          */
         private String timeKey = "expirationInMinutes";
+
+        public int getLength() {
+            return this.length;
+        }
+
+        public void setLength(int length) {
+            this.length = length;
+        }
+
+        public long getExpirationInMinutes() {
+            return this.expirationInMinutes;
+        }
+
+        public void setExpirationInMinutes(long expirationInMinutes) {
+            this.expirationInMinutes = expirationInMinutes;
+        }
+
+        public String getCodeKey() {
+            return this.codeKey;
+        }
+
+        public void setCodeKey(String codeKey) {
+            this.codeKey = codeKey;
+        }
+
+        public String getTimeKey() {
+            return this.timeKey;
+        }
+
+        public void setTimeKey(String timeKey) {
+            this.timeKey = timeKey;
+        }
     }
 }

@@ -26,7 +26,8 @@ import cn.dev33.satoken.sign.template.SaSignUtil;
 import cn.dev33.satoken.stp.StpInterface;
 import cn.dev33.satoken.stp.StpUtil;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.aop.framework.AopProxyUtils;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -54,10 +55,11 @@ import java.util.stream.Stream;
  * @author chengzi
  * @since 2022/12/19 22:13
  */
-@Slf4j
 @Configuration
 @RequiredArgsConstructor
 public class SaTokenConfiguration {
+
+    private static final Logger log = LoggerFactory.getLogger(SaTokenConfiguration.class);
 
     private final SaTokenExtensionProperties properties;
     private final LoginPasswordProperties loginPasswordProperties;

@@ -28,9 +28,7 @@
     <modules>
         <module>continew-server</module>
         <module>continew-system</module>
-        <module>continew-plugin</module>
         <module>continew-common</module>
-        <module>continew-extension</module>
     </modules>
 
     <properties>
@@ -59,27 +57,6 @@
             <dependency>
                 <groupId>top.continew.admin</groupId>
                 <artifactId>continew-common</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
-            <!-- 能力开放插件（后续会改造为独立插件） -->
-            <dependency>
-                <groupId>top.continew.admin</groupId>
-                <artifactId>continew-plugin-open</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
-            <!-- 租户插件（后续会改造为独立插件） -->
-            <dependency>
-                <groupId>top.continew.admin</groupId>
-                <artifactId>continew-plugin-tenant</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
-            <!-- 任务调度插件（后续会改造为独立插件） -->
-            <dependency>
-                <groupId>top.continew.admin</groupId>
-                <artifactId>continew-plugin-schedule</artifactId>
                 <version>${revision}</version>
             </dependency>
 

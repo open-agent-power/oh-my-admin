@@ -16,7 +16,6 @@
 
 package top.continew.admin.config.satoken;
 
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -26,7 +25,6 @@ import org.springframework.stereotype.Component;
  * @author Charles7c
  * @since 2024/6/15 22:15
  */
-@Data
 @Component
 @ConfigurationProperties(prefix = "auth.password")
 public class LoginPasswordProperties {
@@ -35,4 +33,12 @@ public class LoginPasswordProperties {
      * 排除（放行）路径配置
      */
     private String[] excludes = new String[0];
+
+    public String[] getExcludes() {
+        return this.excludes;
+    }
+
+    public void setExcludes(String[] excludes) {
+        this.excludes = excludes;
+    }
 }

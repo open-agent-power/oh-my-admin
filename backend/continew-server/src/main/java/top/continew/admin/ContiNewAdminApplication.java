@@ -23,16 +23,15 @@ import cn.hutool.core.util.URLUtil;
 import cn.hutool.extra.spring.SpringUtil;
 import com.alicp.jetcache.anno.config.EnableMethodCache;
 import io.swagger.v3.oas.annotations.Hidden;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.dromara.x.file.storage.spring.EnableFileStorage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringBootVersion;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
-import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import top.continew.starter.core.ContiNewStarterVersion;
@@ -48,19 +47,23 @@ import top.nextdoc4j.core.configuration.NextDoc4jProperties;
  * @author Charles7c
  * @since 2022/12/8 23:15
  */
-@Slf4j
 @EnableCrudApi
 @EnableGlobalResponse
 @EnableFileStorage
 @EnableMethodCache(basePackages = "top.continew.admin")
-@EnableFeignClients
 @RestController
 @SpringBootApplication
-@RequiredArgsConstructor
 public class ContiNewAdminApplication implements ApplicationRunner {
+
+    private static final Logger log = LoggerFactory.getLogger(ContiNewAdminApplication.class);
 
     private final ApplicationProperties applicationProperties;
     private final ServerProperties serverProperties;
+
+    public ContiNewAdminApplication(ApplicationProperties applicationProperties, ServerProperties serverProperties) {
+        this.applicationProperties = applicationProperties;
+        this.serverProperties = serverProperties;
+    }
 
     public static void main(String[] args) {
         // 禁用 AWS SDK for Java 1.x 弃用提示（1.x 由 x-file-storage 等依赖引入，计划后续迁移至 2.x）
