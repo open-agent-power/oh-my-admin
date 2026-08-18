@@ -16,9 +16,6 @@
           </div>
         </a-grid-item>
         <a-grid-item class="panel" :span="24">
-          <Carousel />
-        </a-grid-item>
-        <a-grid-item class="panel" :span="24">
           <Docs />
         </a-grid-item>
       </a-grid>
@@ -30,7 +27,6 @@
 import Welcome from './components/Welcome.vue'
 import Project from './components/Project.vue'
 import QuickOperation from './components/QuickOperation.vue'
-import Carousel from './components/Carousel.vue'
 import Docs from './components/Docs.vue'
 
 defineOptions({ name: 'Workplace' })
