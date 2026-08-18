@@ -26,24 +26,18 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import me.zhyd.oauth.request.AuthRequest;
-import me.zhyd.oauth.utils.AuthStateUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import top.continew.admin.auth.model.req.LoginReq;
 import top.continew.admin.auth.model.resp.LoginResp;
 import top.continew.admin.auth.model.resp.RouteResp;
-import top.continew.admin.auth.model.resp.SocialAuthAuthorizeResp;
 import top.continew.admin.auth.model.resp.UserInfoResp;
 import top.continew.admin.auth.service.AuthService;
 import top.continew.admin.common.context.UserContext;
 import top.continew.admin.common.context.UserContextHolder;
-import top.continew.admin.system.enums.SocialSourceEnum;
 import top.continew.admin.system.model.resp.user.UserDetailResp;
 import top.continew.admin.system.service.UserService;
-import top.continew.starter.auth.justauth.AuthRequestFactory;
 import top.continew.starter.log.annotation.Log;
-import top.continew.starter.validation.constraints.EnumValue;
 
 import java.util.List;
 
@@ -63,7 +57,6 @@ public class AuthController {
 
     private final AuthService authService;
     private final UserService userService;
-    private final AuthRequestFactory authRequestFactory;
 
     @SaIgnore
     @Operation(summary = "登录", description = "用户登录")
@@ -79,17 +72,6 @@ public class AuthController {
         Object loginId = StpUtil.getLoginId(-1L);
         StpUtil.logout();
         return loginId;
-    }
-
-    @SaIgnore
-    @Operation(summary = "三方账号登录授权", description = "三方账号登录授权")
-    @Parameter(name = "source", description = "来源", example = "gitee", in = ParameterIn.PATH)
-    @GetMapping("/{source}")
-    public SocialAuthAuthorizeResp authorize(@PathVariable @EnumValue(value = SocialSourceEnum.class, message = "第三方平台无效") String source) {
-        AuthRequest authRequest = authRequestFactory.getAuthRequest(source);
-        return SocialAuthAuthorizeResp.builder()
-            .authorizeUrl(authRequest.authorize(AuthStateUtils.createState()))
-            .build();
     }
 
     @Log(ignore = true)

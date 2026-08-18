@@ -114,21 +114,6 @@ CREATE TABLE IF NOT EXISTS `sys_user_password_history` (
     INDEX `idx_user_id`(`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户历史密码表';
 
-CREATE TABLE IF NOT EXISTS `sys_user_social` (
-    `id`              bigint(20)   AUTO_INCREMENT     COMMENT 'ID',
-    `source`          varchar(255) NOT NULL           COMMENT '来源',
-    `open_id`         varchar(255) NOT NULL           COMMENT '开放ID',
-    `user_id`         bigint(20)   NOT NULL           COMMENT '用户ID',
-    `meta_json`       text         DEFAULT NULL       COMMENT '附加信息',
-    `last_login_time` datetime     DEFAULT NULL       COMMENT '最后登录时间',
-    `create_time`     datetime     NOT NULL           COMMENT '创建时间',
-    `update_time`     datetime     DEFAULT NULL       COMMENT '修改时间',
-    `deleted`         bigint(20)   NOT NULL DEFAULT 0 COMMENT '是否已删除（0：否；id：是）',
-    PRIMARY KEY (`id`),
-    UNIQUE INDEX `uk_source_open_id`(`source`, `open_id`, `deleted`),
-    INDEX `idx_deleted`(`deleted`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户社会化关联表';
-
 CREATE TABLE IF NOT EXISTS `sys_user_role` (
     `id`      bigint(20) AUTO_INCREMENT COMMENT 'ID',
     `user_id` bigint(20) NOT NULL       COMMENT '用户ID',

@@ -29,12 +29,6 @@
             <div class="list">
               <div v-if="isEmailLogin" class="mode item" @click="toggleLoginMode"><icon-user /> 账号/手机号登录</div>
               <div v-else class="mode item" @click="toggleLoginMode"><icon-email /> 邮箱登录</div>
-              <a class="item" title="使用 Gitee 账号登录" @click="onOauth('gitee')">
-                <GiSvgIcon name="gitee" :size="24" />
-              </a>
-              <a class="item" title="使用 GitHub 账号登录" @click="onOauth('github')">
-                <GiSvgIcon name="github" :size="24" />
-              </a>
             </div>
           </div>
         </div>
@@ -78,12 +72,6 @@
       <div class="list">
         <div v-if="isEmailLogin" class="mode item" @click="toggleLoginMode"><icon-user /> 账号/手机号登录</div>
         <div v-else class="mode item" @click="toggleLoginMode"><icon-email /> 邮箱登录</div>
-        <a class="item" title="使用 Gitee 账号登录" @click="onOauth('gitee')">
-          <GiSvgIcon name="gitee" :size="24" />
-        </a>
-        <a class="item" title="使用 GitHub 账号登录" @click="onOauth('github')">
-          <GiSvgIcon name="github" :size="24" />
-        </a>
       </div>
     </div>
   </div>
@@ -95,7 +83,6 @@ import Background from './components/background/index.vue'
 import AccountLogin from './components/account/index.vue'
 import PhoneLogin from './components/phone/index.vue'
 import EmailLogin from './components/email/index.vue'
-import { socialAuth } from '@/apis/auth'
 import { useAppStore } from '@/stores'
 import { useTenantStore } from '@/stores/modules/tenant'
 import { useDevice } from '@/hooks'
@@ -116,12 +103,6 @@ const activeTab = ref('1')
 // 切换登录模式
 const toggleLoginMode = () => {
   isEmailLogin.value = !isEmailLogin.value
-}
-
-// 第三方登录授权
-const onOauth = async (source: string) => {
-  const { data } = await socialAuth(source)
-  window.location.href = data.authorizeUrl
 }
 
 // 查询租户状态和租户编码

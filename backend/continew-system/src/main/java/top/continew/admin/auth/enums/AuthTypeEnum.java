@@ -45,12 +45,7 @@ public enum AuthTypeEnum implements BaseEnum<String> {
     /**
      * 手机号
      */
-    PHONE("PHONE", "手机号", UiConstants.COLOR_PRIMARY),
-
-    /**
-     * 第三方账号
-     */
-    SOCIAL("SOCIAL", "第三方账号", UiConstants.COLOR_ERROR);
+    PHONE("PHONE", "手机号", UiConstants.COLOR_PRIMARY);
 
     private final String value;
     private final String description;

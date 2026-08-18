@@ -36,7 +36,6 @@ import top.continew.admin.common.util.SecureUtils;
 import top.continew.admin.system.mapper.*;
 import top.continew.admin.system.mapper.user.UserMapper;
 import top.continew.admin.system.mapper.user.UserPasswordHistoryMapper;
-import top.continew.admin.system.mapper.user.UserSocialMapper;
 import top.continew.admin.system.model.entity.DeptDO;
 import top.continew.admin.system.model.entity.FileDO;
 import top.continew.admin.system.model.entity.RoleDO;
@@ -75,7 +74,6 @@ public class TenantDataApiForSystemImpl implements TenantDataApi {
     private final UserMapper userMapper;
     private final UserPasswordHistoryMapper userPasswordHistoryMapper;
     private final UserRoleMapper userRoleMapper;
-    private final UserSocialMapper userSocialMapper;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -126,7 +124,6 @@ public class TenantDataApiForSystemImpl implements TenantDataApi {
         userMapper.delete(queryWrapper);
         userPasswordHistoryMapper.delete(queryWrapper);
         userRoleMapper.delete(queryWrapper);
-        userSocialMapper.delete(queryWrapper);
     }
 
     /**

@@ -43,13 +43,12 @@ export interface RouteItem {
 }
 
 /** 认证类型 */
-export type AuthType = 'ACCOUNT' | 'PHONE' | 'EMAIL' | 'SOCIAL'
+export type AuthType = 'ACCOUNT' | 'PHONE' | 'EMAIL'
 
 export const AuthTypeConstants = {
   ACCOUNT: 'ACCOUNT',
   PHONE: 'PHONE',
   EMAIL: 'EMAIL',
-  SOCIAL: 'SOCIAL',
 } as const
 
 /** 基础认证请求接口 */
@@ -82,9 +81,4 @@ export interface EmailLoginReq extends AuthReq {
 export interface LoginResp {
   token: string
   tenantId: string
-}
-
-/** 第三方登录授权类型 */
-export interface SocialAuthAuthorizeResp {
-  authorizeUrl: string
 }

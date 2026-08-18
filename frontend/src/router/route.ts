@@ -33,11 +33,6 @@ export const systemRoutes: RouteRecordRaw[] = [
     ],
   },
   {
-    path: '/social/callback',
-    component: () => import('@/views/login/social/index.vue'),
-    meta: { hidden: true },
-  },
-  {
     path: '/pwdExpired',
     component: () => import('@/views/login/pwdExpired/index.vue'),
     meta: { hidden: true },

@@ -107,7 +107,6 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, UserDO, UserRes
 
     private final PasswordEncoder passwordEncoder;
     private final UserPasswordHistoryService userPasswordHistoryService;
-    private final UserSocialService userSocialService;
     private final UserRoleService userRoleService;
     private final OptionService optionService;
     private final RoleService roleService;
@@ -204,8 +203,6 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, UserDO, UserRes
         userRoleService.deleteByUserIds(ids);
         // 删除历史密码
         userPasswordHistoryService.deleteByUserIds(ids);
-        // 删除用户绑定的第三方账号信息
-        userSocialService.deleteByUserIds(ids);
         // 删除用户
         super.delete(ids);
         // 踢出在线用户

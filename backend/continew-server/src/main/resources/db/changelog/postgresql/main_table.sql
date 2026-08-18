@@ -188,30 +188,6 @@ COMMENT ON COLUMN "sys_user_password_history"."password"    IS '密码';
 COMMENT ON COLUMN "sys_user_password_history"."create_time" IS '创建时间';
 COMMENT ON TABLE  "sys_user_password_history"               IS '用户历史密码表';
 
-CREATE TABLE IF NOT EXISTS "sys_user_social" (
-    "id"              int8         NOT NULL,
-    "source"          varchar(255) NOT NULL,
-    "open_id"         varchar(255) NOT NULL,
-    "user_id"         int8         NOT NULL,
-    "meta_json"       text         DEFAULT NULL,
-    "last_login_time" timestamp    DEFAULT NULL,
-    "create_time"     timestamp    NOT NULL,
-    "update_time"     timestamp    DEFAULT NULL,
-    "deleted"         int8         NOT NULL DEFAULT 0,
-    PRIMARY KEY ("id")
-);
-CREATE UNIQUE INDEX "uk_user_source_open_id" ON "sys_user_social" ("source", "open_id", "deleted");
-COMMENT ON COLUMN "sys_user_social"."id"              IS 'ID';
-COMMENT ON COLUMN "sys_user_social"."source"          IS '来源';
-COMMENT ON COLUMN "sys_user_social"."open_id"         IS '开放ID';
-COMMENT ON COLUMN "sys_user_social"."user_id"         IS '用户ID';
-COMMENT ON COLUMN "sys_user_social"."meta_json"       IS '附加信息';
-COMMENT ON COLUMN "sys_user_social"."last_login_time" IS '最后登录时间';
-COMMENT ON COLUMN "sys_user_social"."create_time"     IS '创建时间';
-COMMENT ON COLUMN "sys_user_social"."update_time"     IS '修改时间';
-COMMENT ON COLUMN "sys_user_social"."deleted"         IS '是否已删除（0：否；id：是）';
-COMMENT ON TABLE  "sys_user_social"                   IS '用户社会化关联表';
-
 CREATE TABLE IF NOT EXISTS "sys_user_role" (
     "id"      int8 NOT NULL,
     "user_id" int8 NOT NULL,
